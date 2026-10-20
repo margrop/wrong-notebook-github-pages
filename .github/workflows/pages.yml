@@ -1,0 +1,64 @@
+name: 发布 GitHub Pages 官网
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: 获取官网源码
+        uses: actions/checkout@v4
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: 配置 Pages
+        id: pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+      - name: 生成静态站点
+        env:
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
+        run: python3 scripts/build.py
+      - name: 检查资源与站内链接
+        run: python3 scripts/check_site.py dist
+      - name: 检查脚本语法
+        run: node --check assets/site.js
+      - name: 上传 Pages 文件
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages-production
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 发布官网
+        id: deployment
+        uses: actions/deploy-pages@v4
