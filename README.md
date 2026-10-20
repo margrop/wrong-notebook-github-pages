@@ -2,7 +2,7 @@
 
 用于介绍和宣传 [margrop/wrong-notebook](https://github.com/margrop/wrong-notebook) 的中文官方网站。基于相邻 `../wrong-notebook` 项目的现有功能与真实截图制作。
 
-官网地址：**<https://margrop.github.io/wrong-notebook-github-pages/>**
+官网地址：**<https://blog.margrop.net/wrong-notebook-github-pages/>**（GitHub Pages 继承账号现有的自定义域名。）
 
 纯 HTML、CSS 与原生 JavaScript，无需 npm 安装或前端构建工具，可部署到 GitHub Pages 的根域名、项目子路径及其他静态托管服务。
 
