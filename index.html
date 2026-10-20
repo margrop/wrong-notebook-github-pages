@@ -136,19 +136,17 @@
       <section class="section deploy-section" id="deploy" aria-labelledby="deploy-title">
         <div class="container deploy-grid">
           <div class="deploy-copy"><p class="eyebrow">YOUR NOTEBOOK, YOUR SPACE</p><h2 id="deploy-title">把学习资料，<br>留在自己的空间。</h2><p class="section-description">在自己的电脑、NAS 或服务器上部署。<br>用熟悉的 AI 服务，建立属于自己的错题本。</p><ul class="deploy-benefits"><li><svg class="icon"><use href="#i-shield"/></svg><div><strong>数据由自己管理</strong><p>SQLite 数据库，支持数据备份导入与导出。</p></div></li><li><svg class="icon"><use href="#i-sparkle"/></svg><div><strong>AI 服务，自由选择</strong><p>Gemini、OpenAI、Azure OpenAI、Anthropic，<br>也支持相应的兼容接口。</p></div></li><li><svg class="icon"><use href="#i-book"/></svg><div><strong>随手打开，随时复习</strong><p>支持 PWA，可添加到手机和平板主屏幕。</p></div></li></ul><a class="text-link" href="https://github.com/margrop/wrong-notebook#-快速开始" target="_blank" rel="noopener noreferrer">阅读完整部署文档 <svg class="icon small"><use href="#i-arrow-up"/></svg></a></div>
-          <div class="deploy-terminal"><div class="terminal-top"><div role="tablist" aria-label="部署方式"><button type="button" role="tab" id="install-docker" aria-controls="install-panel-docker" aria-selected="true" data-install="docker">Docker 部署</button><button type="button" role="tab" id="install-source" aria-controls="install-panel-source" aria-selected="false" data-install="source" tabindex="-1">本地源码</button></div><span class="terminal-label">QUICK START</span></div><div class="code-panel" id="install-panel-docker" role="tabpanel" aria-labelledby="install-docker" tabindex="0"><div class="code-heading"><span>构建当前项目，保留全部功能</span><button class="copy-button" type="button" data-copy="docker-code"><svg class="icon small"><use href="#i-copy"/></svg><span>复制命令</span></button></div><pre><code id="docker-code"><span class="code-comment"># 1. 获取源码并构建镜像</span>
-git clone https://github.com/margrop/wrong-notebook.git
+          <div class="deploy-terminal"><div class="terminal-top"><div role="tablist" aria-label="部署方式"><button type="button" role="tab" id="install-docker" aria-controls="install-panel-docker" aria-selected="true" data-install="docker">Docker 部署</button><button type="button" role="tab" id="install-source" aria-controls="install-panel-source" aria-selected="false" data-install="source" tabindex="-1">本地源码</button></div><span class="terminal-label">QUICK START</span></div><div class="code-panel" id="install-panel-docker" role="tabpanel" aria-labelledby="install-docker" tabindex="0"><div class="code-heading"><span>使用已发布镜像，支持 amd64 / arm64</span><button class="copy-button" type="button" data-copy="docker-code"><svg class="icon small"><use href="#i-copy"/></svg><span>复制命令</span></button></div><pre><code id="docker-code"><span class="code-comment"># 1. 创建数据与配置目录</span>
+mkdir -p wrong-notebook/data wrong-notebook/config
 cd wrong-notebook
-docker build -t wrong-notebook:local .
 
-<span class="code-comment"># 2. 持久化数据与配置，启动应用</span>
-mkdir -p data config
+<span class="code-comment"># 2. 拉取镜像并启动，数据保存在挂载目录</span>
 docker run -d --name wrong-notebook \
   --restart unless-stopped -p 3000:3000 \
   -e NEXTAUTH_SECRET="$(openssl rand -hex 32)" \
   -v "$(pwd)/data:/app/data" \
   -v "$(pwd)/config:/app/config" \
-  wrong-notebook:local</code></pre><div class="terminal-note"><span class="status-dot"></span> 启动后访问 <code>http://localhost:3000</code></div></div><div class="code-panel" id="install-panel-source" role="tabpanel" aria-labelledby="install-source" tabindex="0" hidden><div class="code-heading"><span>需要 Node.js 22+ 与 npm</span><button class="copy-button" type="button" data-copy="source-code"><svg class="icon small"><use href="#i-copy"/></svg><span>复制命令</span></button></div><pre><code id="source-code">git clone https://github.com/margrop/wrong-notebook.git
+  ghcr.io/margrop/wrong-notebook:latest</code></pre><div class="terminal-note"><span class="status-dot"></span> 启动后访问 <code>http://localhost:3000</code></div></div><div class="code-panel" id="install-panel-source" role="tabpanel" aria-labelledby="install-source" tabindex="0" hidden><div class="code-heading"><span>需要 Node.js 22+ 与 npm</span><button class="copy-button" type="button" data-copy="source-code"><svg class="icon small"><use href="#i-copy"/></svg><span>复制命令</span></button></div><pre><code id="source-code">git clone https://github.com/margrop/wrong-notebook.git
 cd wrong-notebook
 npm ci
 cp .env.example .env
@@ -160,13 +158,13 @@ npx prisma db seed
 npx ts-node --compiler-options '{"module":"CommonJS"}' \
   scripts/rebuild-system-tags.ts
 
-npm run dev</code></pre><div class="terminal-note"><span class="status-dot"></span> 启动后访问 <code>http://localhost:3000</code></div></div><p class="setup-note">首次登录后请修改初始密码，并在「设置」中配置 AI 服务。Docker 镜像需从本项目源码构建，完整步骤见部署文档。</p></div>
+npm run dev</code></pre><div class="terminal-note"><span class="status-dot"></span> 启动后访问 <code>http://localhost:3000</code></div></div><p class="setup-note">首次登录后请修改初始密码，并在「设置」中配置 AI 服务。镜像发布在 <code>ghcr.io/margrop/wrong-notebook</code>，也可用 <code>2026.10.20</code> 等版本标签锁定版本；升级、Docker Compose 和自行构建镜像见部署文档。</p></div>
         </div>
       </section>
 
       <section class="section faq-section" id="faq" aria-labelledby="faq-title">
         <div class="container faq-grid"><div class="section-heading"><p class="eyebrow">GOOD QUESTIONS</p><h2 id="faq-title">开始之前，<br>你可能想知道。</h2><p>还有疑问？欢迎到 GitHub 交流。</p><a class="text-link" href="https://github.com/margrop/wrong-notebook/issues" target="_blank" rel="noopener noreferrer">反馈问题或建议 <svg class="icon small"><use href="#i-arrow-up"/></svg></a></div><div class="faq-list">
-          <details open><summary>使用这个项目，需要付费吗？<svg class="icon small"><use href="#i-chevron"/></svg></summary><p>项目提供源码供自行部署。AI 识题、生成讲解等功能需要配置自己的 AI 服务，调用费用由对应服务商收取，也可以接入兼容 OpenAI 或 Anthropic 接口的服务。</p></details>
+          <details open><summary>使用这个项目，需要付费吗？<svg class="icon small"><use href="#i-chevron"/></svg></summary><p>项目提供源码和 Docker 镜像供自行部署。AI 识题、生成讲解等功能需要配置自己的 AI 服务，调用费用由对应服务商收取，也可以接入兼容 OpenAI 或 Anthropic 接口的服务。</p></details>
           <details><summary>适合哪些年级和学科？<svg class="icon small"><use href="#i-chevron"/></svg></summary><p>创建错题本时可以选择小学、初中或高中学段，以及对应学科。系统按学段、学科组织知识点，支持自定义标签；AI 可辅助识别知识点和难度。</p></details>
           <details><summary>可以在手机上用吗？<svg class="icon small"><use href="#i-chevron"/></svg></summary><p>可以。应用支持手机、平板和电脑浏览器，并提供 PWA 支持。在 iPhone / iPad 的 Safari 分享菜单，或 Android Chrome 菜单中选择「添加到主屏幕」，即可像 App 一样打开。</p></details>
           <details><summary>数据存在哪里？可以完全离线吗？<svg class="icon small"><use href="#i-chevron"/></svg></summary><p>题目和作答记录保存在你部署环境的 SQLite 数据库中，AI 配置也保存在自己的部署环境。AI 识别、解答和生成等功能会向所配置的服务发送相关内容，需要该服务可访问；PWA 不等于完整离线运行。</p></details>
