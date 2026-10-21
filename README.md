@@ -58,6 +58,6 @@ scripts/check_site.py       资源、锚点、ARIA 与子路径检查
 
 功能说明以原项目的 README 和实现为依据。修改页面内容时，中文和英文页面需同步更新。更新页面时，先核对实际能力，避免把示意题目、AI 评估或界面中的个人统计表述为产品效果承诺。
 
-截图于 2026-10-20 采集于原应用，由原项目提供；用户名已遮挡。本官网将 PNG 转为 WebP，并复用了应用图标。具体来源与更新方式见 [ASSETS.md](ASSETS.md)。
+截图于 2026-10-22 采集于原应用，由原项目提供，均为浅色模式；中文页使用中文界面截图，英文页使用 `assets/images/en/` 下的英文界面截图。本官网将 PNG 转为 WebP，并复用了应用图标。具体来源与更新方式见 [ASSETS.md](ASSETS.md)。
 
 项目应用基于 [wttwins/wrong-notebook](https://github.com/wttwins/wrong-notebook) 扩展，官网页脚保留了上游致谢。

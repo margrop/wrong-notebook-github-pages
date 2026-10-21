@@ -2,6 +2,8 @@
 
 // 英文页面与中文页面共用本脚本，按 <html lang> 选择界面文字。
 const isEnglish = document.documentElement.lang.startsWith("en");
+// 英文页使用 images/en/ 下的英文界面截图
+const imageDir = isEnglish ? "en/" : "";
 const text = isEnglish
   ? { enlarge: (title) => `Enlarge screenshot: ${title}`, copied: "Command copied. Paste it into your terminal.", copyManually: "Press Ctrl+C / ⌘C to copy the selected command", openNav: "Open navigation", closeNav: "Close navigation" }
   : { enlarge: (title) => `放大${title}截图`, copied: "命令已复制，可粘贴到终端运行", copyManually: "请按 Ctrl+C / ⌘C 复制已选中的命令", openNav: "打开导航", closeNav: "关闭导航" };
@@ -38,7 +40,7 @@ function selectPreview(key, moveFocus = false) {
     tab.tabIndex = selected ? 0 : -1;
     if (selected && moveFocus) tab.focus();
   }
-  previewImage.src = new URL(`images/${key}.webp`, document.querySelector('script[src$="site.js"]').src).href;
+  previewImage.src = new URL(`images/${imageDir}${key}.webp`, document.querySelector('script[src$="site.js"]').src).href;
   previewImage.alt = item.alt;
   document.getElementById("preview-window-title").textContent = item.title;
   document.getElementById("preview-description").textContent = item.description;
@@ -72,7 +74,7 @@ const dialogImage = document.getElementById("dialog-image");
 function showImage(key) {
   const item = screenshots[key];
   if (!item) return;
-  dialogImage.src = new URL(`images/${key}.webp`, document.querySelector('script[src$="site.js"]').src).href;
+  dialogImage.src = new URL(`images/${imageDir}${key}.webp`, document.querySelector('script[src$="site.js"]').src).href;
   dialogImage.alt = item.alt;
   document.getElementById("dialog-title").textContent = item.title;
   document.getElementById("dialog-description").textContent = item.description;

@@ -20,8 +20,12 @@ def render(source: str, path: str, site_url: str) -> str:
     if not site_url:
         return html
     page_url = escape(f"{site_url}/{path}", quote=True)
-    image_url = escape(site_url + "/assets/images/social-preview.png", quote=True)
-    html = re.sub(r'content="(?:\./|\.\./)assets/images/social-preview\.png"', f'content="{image_url}"', html)
+    # 分享图按语言区分：中文 assets/images/，英文 assets/images/en/
+    html = re.sub(
+        r'content="(?:\./|\.\./)assets/images/((?:en/)?social-preview\.png)"',
+        lambda m: f'content="{escape(site_url + "/assets/images/" + m.group(1), quote=True)}"',
+        html,
+    )
     # 搜索引擎要求语言版本互相声明完整地址，x-default 指向中文首页。
     alternates = [f'<link rel="alternate" hreflang="{lang}" href="{escape(f"{site_url}/{target}", quote=True)}">' for _, target, lang in PAGES]
     alternates.append(f'<link rel="alternate" hreflang="x-default" href="{escape(site_url + "/", quote=True)}">')

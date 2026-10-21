@@ -76,8 +76,10 @@ def check_page(root: Path, name: str, language: str) -> tuple[PageParser, list[s
         if not parsed.path and parsed.fragment and unquote(parsed.fragment) not in page.ids:
             page.errors.append(f"锚点不存在：{link}")
     # 预览图通过脚本动态切换，单独核对所有已声明的标签对应的图片。
+    # 英文页使用 assets/images/en/ 下的英文界面截图（与 site.js 一致）。
+    image_dir = root / "assets" / "images" / ("en" if language.startswith("en") else "")
     for preview in re.findall(r'data-preview="([\w-]+)"', html):
-        if not (root / "assets" / "images" / f"{preview}.webp").is_file():
+        if not (image_dir / f"{preview}.webp").is_file():
             page.errors.append(f"预览图不存在：{preview}")
     return page, [f"{name}：{error}" for error in page.errors]
 

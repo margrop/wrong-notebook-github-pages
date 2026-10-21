@@ -188,13 +188,13 @@ h1 { font-size: clamp(36px, 4.15vw, 59px); font-weight: 780; line-height: 1.4; l
 .preview-tabs button:hover { background: #ffffff0b; }
 .preview-tabs button[aria-selected="true"]:hover { background: #715a95; }
 .preview-tabs .icon { width: 15px; height: 15px; }
-.preview-panel { max-width: 1060px; margin-inline: auto; overflow: hidden; border: 1px solid #6155686b; border-radius: 12px; background: #2d2d2d; box-shadow: 0 20px 55px #0b061e3d; }
-.preview-toolbar { min-height: 42px; display: flex; align-items: center; justify-content: space-between; padding: 7px 16px; color: #aca1b8; font-size: 10px; background: #36303f; }
+.preview-panel { max-width: 1060px; margin-inline: auto; overflow: hidden; border: 1px solid #6155686b; border-radius: 12px; background: #f7f8fb; box-shadow: 0 20px 55px #0b061e3d; }
+.preview-toolbar { min-height: 42px; display: flex; align-items: center; justify-content: space-between; padding: 7px 16px; color: #6f6680; font-size: 10px; background: #ece9f2; }
 .preview-toolbar .window-dots i { opacity: .6; }
-.preview-expand { display: flex; align-items: center; gap: 5px; background: transparent; color: #b0a4c0; font-size: 9px; border-radius: 4px; }
-.preview-expand:hover { color: white; }
+.preview-expand { display: flex; align-items: center; gap: 5px; background: transparent; color: #6f6680; font-size: 9px; border-radius: 4px; }
+.preview-expand:hover { color: #3f3654; }
 .preview-expand .icon { width: 12px; height: 12px; }
-#preview-image { width: 100%; height: auto; aspect-ratio: 1140 / 784; object-fit: contain; background: #2d2d2d; }
+#preview-image { width: 100%; height: auto; aspect-ratio: 1140 / 784; object-fit: contain; background: #f7f8fb; }
 .preview-image-button { cursor: zoom-in; }
 .preview-caption { display: flex; max-width: 1060px; margin: 20px auto 0; justify-content: space-between; gap: 22px; align-items: center; }
 .preview-caption p { color: #b0a7bc; font-size: 11px; }
@@ -272,7 +272,7 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 .dialog-toolbar h2 { font-size: 13px; font-weight: 550; }
 .dialog-toolbar button { color: #d2c6e1; }
 .dialog-toolbar button:hover { background: #ffffff0d; }
-#dialog-image { max-height: calc(100dvh - 170px); width: 100%; object-fit: contain; background: #2d2d2d; }
+#dialog-image { max-height: calc(100dvh - 170px); width: 100%; object-fit: contain; background: #f7f8fb; }
 #dialog-description { padding: 15px 22px; font-size: 11px; color: #b2a5c0; }
 .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); border-radius: 9px; background: #30253d; color: white; box-shadow: 0 8px 25px #30253d25; padding: 11px 23px; z-index: 50; font-size: 12px; max-width: calc(100% - 40px); }
 
