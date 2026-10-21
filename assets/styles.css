@@ -581,3 +581,19 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
   .hero-grid, .deploy-grid, .faq-grid { display: block; min-height: 0; }
   .feature-card, .preview-panel { break-inside: avoid; }
 }
+
+/* 在线演示账号与安装包列表 */
+.hero-demo { margin-top: 14px; font-size: 11px; color: #7a6f86; }
+.hero-demo code { color: #6f518e; }
+.terminal-top > div { flex-wrap: wrap; }
+.platform-list { list-style: none; margin: 0; padding: 16px 23px 18px; display: grid; gap: 12px; }
+.platform-list li { display: grid; grid-template-columns: 64px 1fr; gap: 12px; align-items: baseline; font-size: 11px; line-height: 1.7; color: #6d5b78; }
+.platform-list strong { color: #5d4670; font-size: 12px; }
+.platform-list code { color: #7c628d; overflow-wrap: anywhere; }
+.terminal-note a { color: #6f518e; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 680px) {
+  .hero-demo { text-align: center; font-size: 10px; }
+  .terminal-label { display: none; }
+  .platform-list { padding-inline: 16px; }
+  .platform-list li { grid-template-columns: 1fr; gap: 2px; }
+}
