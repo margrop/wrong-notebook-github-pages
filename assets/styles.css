@@ -46,6 +46,9 @@ h1, h2, h3, p, figure { margin: 0; }
 .github-link .icon { width: 19px; height: 19px; }
 .github-link .small { width: 14px; height: 14px; margin-left: 5px; }
 .menu-toggle, .mobile-nav { display: none; }
+.lang-switch { margin-left: -12px; padding: 9px 4px; color: #64616c; font-size: 13px; font-weight: 600; white-space: nowrap; transition: color .2s; }
+.lang-switch:hover { color: var(--purple); }
+html:lang(en) h1 { letter-spacing: -.035em; }
 .hero { overflow: hidden; position: relative; background: radial-gradient(ellipse at 84% 24%, #eae5f8a3, transparent 43%); }
 .hero-grid { display: grid; grid-template-columns: 1fr 1.08fr; gap: 38px; align-items: center; padding-top: 62px; padding-bottom: 52px; min-height: 630px; }
 .eyebrow { color: var(--purple); font-size: 11px; letter-spacing: .13em; font-weight: 700; line-height: 1.7; }
@@ -410,6 +413,8 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
   .desktop-nav { display: none; }
   .github-link { margin-left: auto; font-size: 11px; border: 0; background: none; padding: 7px 0; gap: 6px; }
   .github-link .icon { width: 17px; height: 17px; }
+  .lang-switch { margin-left: 0; padding: 7px 2px; font-size: 12px; }
+  html:lang(en) .desktop-break { display: none; }
   .menu-toggle { display: inline-flex; padding: 7px 0 7px 5px; }
   .menu-toggle .icon { width: 23px; height: 23px; color: #797180; }
   .mobile-nav { display: flex; flex-direction: column; padding: 7px 20px 19px; gap: 2px; border-top: 1px solid var(--line); }

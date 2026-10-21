@@ -1,8 +1,8 @@
 # 智能错题本 · 项目官网
 
-用于介绍和宣传 [margrop/wrong-notebook](https://github.com/margrop/wrong-notebook) 的中文官方网站。基于相邻 `../wrong-notebook` 项目的现有功能与真实截图制作。
+用于介绍和宣传 [margrop/wrong-notebook](https://github.com/margrop/wrong-notebook) 的官方网站，提供简体中文（首页）和英文（`en/`）两个版本。基于相邻 `../wrong-notebook` 项目的现有功能与真实截图制作。
 
-官网地址：**<https://blog.margrop.net/wrong-notebook-github-pages/>**（GitHub Pages 继承账号现有的自定义域名。）
+官网地址：**<https://blog.margrop.net/wrong-notebook-github-pages/>**，英文版 <https://blog.margrop.net/wrong-notebook-github-pages/en/>（GitHub Pages 继承账号现有的自定义域名。）
 
 纯 HTML、CSS 与原生 JavaScript，无需 npm 安装或前端构建工具，可部署到 GitHub Pages 的根域名、项目子路径及其他静态托管服务。
 
@@ -37,12 +37,14 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 - Docker / 安装包（Windows、macOS、Linux、飞牛OS）/ npm / 本地源码四种部署方式切换，命令复制与受限环境下的手动复制回退。
 - 常见问题折叠面板、手机导航、当前章节高亮。
 - 手机、平板与桌面布局，减少动态效果偏好、语义化标签与键盘操作。
+- 页头和页脚可切换中英文，发布时自动生成 `hreflang` 语言版本声明；两个页面共用样式与脚本，脚本按 `<html lang>` 选择提示文字。
 - 本地图标、WebP 截图、分享图、搜索引擎描述，无外部字体、统计或 CDN 脚本。
 
 ## 文件结构
 
 ```text
-index.html                  页面内容与语义结构
+index.html                  中文页面内容与语义结构
+en/index.html               英文页面（资源以 ../assets/ 引用）
 assets/styles.css           布局、视觉与响应式样式
 assets/site.js              预览、弹窗、标签、导航与复制
 assets/images/              已脱敏的真实界面与分享图
@@ -54,7 +56,7 @@ scripts/check_site.py       资源、锚点、ARIA 与子路径检查
 
 ## 内容与素材维护
 
-功能说明以原项目的 README 和实现为依据。更新页面时，先核对实际能力，避免把示意题目、AI 评估或界面中的个人统计表述为产品效果承诺。
+功能说明以原项目的 README 和实现为依据。修改页面内容时，中文和英文页面需同步更新。更新页面时，先核对实际能力，避免把示意题目、AI 评估或界面中的个人统计表述为产品效果承诺。
 
 截图于 2026-10-20 采集于原应用，由原项目提供；用户名已遮挡。本官网将 PNG 转为 WebP，并复用了应用图标。具体来源与更新方式见 [ASSETS.md](ASSETS.md)。
 

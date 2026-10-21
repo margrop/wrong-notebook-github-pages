@@ -1,7 +1,20 @@
 "use strict";
 
+// 英文页面与中文页面共用本脚本，按 <html lang> 选择界面文字。
+const isEnglish = document.documentElement.lang.startsWith("en");
+const text = isEnglish
+  ? { enlarge: (title) => `Enlarge screenshot: ${title}`, copied: "Command copied. Paste it into your terminal.", copyManually: "Press Ctrl+C / ⌘C to copy the selected command", openNav: "Open navigation", closeNav: "Close navigation" }
+  : { enlarge: (title) => `放大${title}截图`, copied: "命令已复制，可粘贴到终端运行", copyManually: "请按 Ctrl+C / ⌘C 复制已选中的命令", openNav: "打开导航", closeNav: "关闭导航" };
+
 // 所有预览素材均来自原项目已脱敏的真实截图。
-const screenshots = {
+const screenshots = isEnglish ? {
+  notebook: { title: "My notebook", alt: "Question cards with summaries, difficulty stars and knowledge points, with multiple filters", description: "Filter by knowledge point, grade, mastery and A/B paper to quickly find the questions you need to review." },
+  upload: { title: "Photo and text input", alt: "Photo upload, manual input, direct entry and clipboard paste on the home page", description: "Upload or drag photos, paste screenshots, or type the question. Turn on review before import to check results before saving." },
+  "svg-animation": { title: "SVG animated explanation", alt: "SVG animated explanation of a hexagon coloring problem, with a recursion table and player controls", description: "The solution becomes a step-by-step SVG animation with pause, seeking, replay and full screen, so you can follow at your own pace." },
+  "mastery-history": { title: "Answer history and mastery", alt: "Variant questions, answer history and an AI mastery estimate under a question", description: "Results from similar-question practice and exams are kept under the original question. Mastery is estimated from actual practice to guide your next review." },
+  "exam-print": { title: "Exam print preview", alt: "Print preview of a real exam with source IDs, answer page toggle, download and print options", description: "Build practice exams around weak knowledge points, include an answer page, download HTML, or print and save as PDF from the browser." },
+  "error-stats": { title: "Statistics", alt: "Charts of mistake count, mastered count, subject distribution and monthly trend", description: "Review mistake count, mastery rate, subject distribution and monthly trend; practice statistics also show accuracy and distribution." },
+} : {
   notebook: { title: "我的错题本", alt: "错题卡片展示题目摘要、难度星级与知识点，并支持多维度筛选", description: "按知识点、年级、掌握情况和 A/B 卷筛选，把需要复习的题目快速找出来。" },
   upload: { title: "拍照与文字录入", alt: "首页的拍照上传、手动输入、直接录入和剪贴板粘贴入口", description: "拍照上传、拖拽图片、粘贴截图，也能输入文字。可以开启导入前人工确认，先校对再保存。" },
   "svg-animation": { title: "SVG 动画讲解", alt: "六边形染色题的 SVG 动画讲解、递推计数表与播放控制", description: "把解题过程变成分步骤的 SVG 动画，支持暂停、拖动进度、重播和全屏，按自己的节奏理解。" },
@@ -29,7 +42,7 @@ function selectPreview(key, moveFocus = false) {
   previewImage.alt = item.alt;
   document.getElementById("preview-window-title").textContent = item.title;
   document.getElementById("preview-description").textContent = item.description;
-  document.getElementById("preview-image-button").setAttribute("aria-label", `放大${item.title}截图`);
+  document.getElementById("preview-image-button").setAttribute("aria-label", text.enlarge(item.title));
   previewPanel.setAttribute("aria-labelledby", `tab-${key}`);
 }
 
@@ -104,7 +117,7 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
     const code = document.getElementById(button.dataset.copy);
     try {
       await navigator.clipboard.writeText(code.textContent);
-      showToast("命令已复制，可粘贴到终端运行");
+      showToast(text.copied);
     } catch {
       // 权限受限或非安全上下文时选中原文，保留可靠的手动复制方式。
       const selection = window.getSelection();
@@ -112,7 +125,7 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
       range.selectNodeContents(code);
       selection.removeAllRanges();
       selection.addRange(range);
-      showToast("请按 Ctrl+C / ⌘C 复制已选中的命令");
+      showToast(text.copyManually);
     }
   });
 });
@@ -122,13 +135,13 @@ const mobileNav = document.getElementById("mobile-nav");
 function closeMenu() {
   mobileNav.hidden = true;
   menuToggle.setAttribute("aria-expanded", "false");
-  menuToggle.setAttribute("aria-label", "打开导航");
+  menuToggle.setAttribute("aria-label", text.openNav);
 }
 menuToggle.addEventListener("click", () => {
   const open = menuToggle.getAttribute("aria-expanded") !== "true";
   mobileNav.hidden = !open;
   menuToggle.setAttribute("aria-expanded", String(open));
-  menuToggle.setAttribute("aria-label", open ? "关闭导航" : "打开导航");
+  menuToggle.setAttribute("aria-label", open ? text.closeNav : text.openNav);
 });
 mobileNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
 document.addEventListener("keydown", (event) => {
@@ -141,7 +154,8 @@ window.matchMedia("(min-width: 681px)").addEventListener("change", (event) => { 
 
 // 未启用脚本时仍显示主体内容；增强功能就绪后才跟踪导航高亮。
 if ("IntersectionObserver" in window) {
-  const navLinks = [...document.querySelectorAll(".desktop-nav a")];
+  // 只跟踪站内锚点，外部链接（如在线演示）没有对应章节。
+  const navLinks = [...document.querySelectorAll('.desktop-nav a[href^="#"]')];
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;

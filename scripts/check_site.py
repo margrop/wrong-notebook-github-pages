@@ -42,17 +42,19 @@ class PageParser(HTMLParser):
                 self.references.append((attr, target))
 
 
-def main() -> int:
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else "dist").resolve()
-    index = root / "index.html"
-    if not index.is_file():
-        print(f"缺少 {index}，请先运行 python3 scripts/build.py")
-        return 1
+# 需要检查的页面及其语言
+PAGES = {"index.html": "zh-CN", "en/index.html": "en"}
+
+
+def check_page(root: Path, name: str, language: str) -> tuple[PageParser, list[str]]:
+    index = root / name
     page = PageParser()
+    if not index.is_file():
+        return page, [f"缺少 {name}，请先运行 python3 scripts/build.py"]
     html = index.read_text(encoding="utf-8")
     page.feed(html)
-    if page.language != "zh-CN":
-        page.errors.append("页面语言应为 zh-CN")
+    if page.language != language:
+        page.errors.append(f"页面语言应为 {language}")
     if page.h1_count != 1:
         page.errors.append(f"主标题数量应为 1，当前为 {page.h1_count}")
     for label, target in page.references:
@@ -64,25 +66,40 @@ def main() -> int:
             continue
         if parsed.path.startswith("/"):
             page.errors.append(f"根路径资源不兼容项目型 Pages：{link}")
-        if parsed.path and not (root / unquote(parsed.path)).is_file():
-            page.errors.append(f"本地资源不存在：{link}")
+        if parsed.path:
+            # 相对页面所在目录解析；目录链接对应其中的 index.html，且不能超出发布目录。
+            target = (index.parent / unquote(parsed.path)).resolve()
+            if parsed.path.endswith("/"):
+                target = target / "index.html"
+            if not target.is_relative_to(root) or not target.is_file():
+                page.errors.append(f"本地资源不存在：{link}")
         if not parsed.path and parsed.fragment and unquote(parsed.fragment) not in page.ids:
             page.errors.append(f"锚点不存在：{link}")
     # 预览图通过脚本动态切换，单独核对所有已声明的标签对应的图片。
-    for name in re.findall(r'data-preview="([\w-]+)"', html):
-        if not (root / "assets" / "images" / f"{name}.webp").is_file():
-            page.errors.append(f"预览图不存在：{name}")
+    for preview in re.findall(r'data-preview="([\w-]+)"', html):
+        if not (root / "assets" / "images" / f"{preview}.webp").is_file():
+            page.errors.append(f"预览图不存在：{preview}")
+    return page, [f"{name}：{error}" for error in page.errors]
+
+
+def main() -> int:
+    root = Path(sys.argv[1] if len(sys.argv) > 1 else "dist").resolve()
+    errors: list[str] = []
+    summary: list[str] = []
+    for name, language in PAGES.items():
+        page, page_errors = check_page(root, name, language)
+        errors.extend(page_errors)
+        summary.append(f"{name} {len(page.ids)} 个 ID、{len(page.links)} 个资源/链接")
     for path in root.rglob("*"):
         if path.is_file() and path.suffix in {".db", ".sqlite", ".sqlite3", ".env", ".pem", ".key"}:
-            page.errors.append(f"发布包中发现不应发布的文件：{path.relative_to(root)}")
-    if page.errors:
+            errors.append(f"发布包中发现不应发布的文件：{path.relative_to(root)}")
+    if errors:
         print("静态检查未通过：")
-        for error in page.errors:
+        for error in errors:
             print(f"- {error}")
         return 1
-    print(f"静态检查通过：{len(page.ids)} 个 ID、{len(page.links)} 个资源/链接、ARIA 关联、图片文本与 Pages 子路径。")
+    print(f"静态检查通过：{'；'.join(summary)}，ARIA 关联、图片文本与 Pages 子路径。")
     return 0
-
 
 if __name__ == "__main__":
     raise SystemExit(main())
