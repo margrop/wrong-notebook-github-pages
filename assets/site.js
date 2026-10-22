@@ -2,19 +2,19 @@
 
 // 英文页面与中文页面共用本脚本，按 <html lang> 选择界面文字。
 const isEnglish = document.documentElement.lang.startsWith("en");
-// 英文页使用 images/en/ 下的英文界面截图
+// 英文页使用 images/en/ 下的英文界面与英文演示内容截图
 const imageDir = isEnglish ? "en/" : "";
 const text = isEnglish
   ? { enlarge: (title) => `Enlarge screenshot: ${title}`, copied: "Command copied. Paste it into your terminal.", copyManually: "Press Ctrl+C / ⌘C to copy the selected command", openNav: "Open navigation", closeNav: "Close navigation" }
   : { enlarge: (title) => `放大${title}截图`, copied: "命令已复制，可粘贴到终端运行", copyManually: "请按 Ctrl+C / ⌘C 复制已选中的命令", openNav: "打开导航", closeNav: "关闭导航" };
 
-// 所有预览素材均来自原项目已脱敏的真实截图。
+// 所有预览素材均采集于原应用；英文版使用独立的英文演示数据。
 const screenshots = isEnglish ? {
-  notebook: { title: "My notebook", alt: "Question cards with summaries, difficulty stars and knowledge points, with multiple filters", description: "Filter by knowledge point, grade, mastery and A/B paper to quickly find the questions you need to review." },
+  notebook: { title: "My notebook", alt: "English question cards with summaries, difficulty stars, English knowledge points and filters", description: "Filter by knowledge point, grade, mastery and A/B paper to quickly find the questions you need to review." },
   upload: { title: "Photo and text input", alt: "Photo upload, manual input, direct entry and clipboard paste on the home page", description: "Upload or drag photos, paste screenshots, or type the question. Turn on review before import to check results before saving." },
-  "svg-animation": { title: "SVG animated explanation", alt: "SVG animated explanation of a hexagon coloring problem, with a recursion table and player controls", description: "The solution becomes a step-by-step SVG animation with pause, seeking, replay and full screen, so you can follow at your own pace." },
-  "mastery-history": { title: "Answer history and mastery", alt: "Variant questions, answer history and an AI mastery estimate under a question", description: "Results from similar-question practice and exams are kept under the original question. Mastery is estimated from actual practice to guide your next review." },
-  "exam-print": { title: "Exam print preview", alt: "Print preview of a real exam with source IDs, answer page toggle, download and print options", description: "Build practice exams around weak knowledge points, include an answer page, download HTML, or print and save as PDF from the browser." },
+  "svg-animation": { title: "SVG animated explanation", alt: "English SVG explanation of a hexagon coloring problem, with an English counting table and player controls", description: "The solution becomes a step-by-step SVG animation with pause, seeking, replay and full screen, so you can follow at your own pace." },
+  "mastery-history": { title: "Answer history and mastery", alt: "An English variant question, sample answer history and a mastery estimate", description: "Results from similar-question practice and exams are kept under the original question. Mastery is estimated from practice to guide your next review." },
+  "exam-print": { title: "Exam print preview", alt: "Print preview of an English demo exam with source IDs, answer page toggle, download and print options", description: "Build practice exams around weak knowledge points, include an answer page, download HTML, or print and save as PDF from the browser." },
   "error-stats": { title: "Statistics", alt: "Charts of mistake count, mastered count, subject distribution and monthly trend", description: "Review mistake count, mastery rate, subject distribution and monthly trend; practice statistics also show accuracy and distribution." },
 } : {
   notebook: { title: "我的错题本", alt: "错题卡片展示题目摘要、难度星级与知识点，并支持多维度筛选", description: "按知识点、年级、掌握情况和 A/B 卷筛选，把需要复习的题目快速找出来。" },
