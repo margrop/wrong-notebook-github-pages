@@ -43,7 +43,7 @@ class PageParser(HTMLParser):
 
 
 # 需要检查的页面及其语言
-PAGES = {"index.html": "zh-CN", "en/index.html": "en"}
+PAGES = {"index.html": "zh-CN", "en/index.html": "en", "download/index.html": "zh-CN", "en/download/index.html": "en"}
 
 
 def check_page(root: Path, name: str, language: str) -> tuple[PageParser, list[str]]:

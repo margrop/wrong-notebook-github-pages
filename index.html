@@ -21,6 +21,7 @@
     <link rel="preload" as="image" href="./assets/images/notebook.webp" fetchpriority="high">
     <link rel="stylesheet" href="./assets/styles.css">
     <script src="./assets/site.js" defer></script>
+    <script src="./assets/download.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">跳到正文</a>
@@ -38,6 +39,7 @@
       <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 8V3h10v5M7 17H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-3M7 13h10v8H7v-8Zm11-2h1"/></symbol>
       <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 3h8l10 10-8 8L3 11V3Zm4 4h.01"/></symbol>
       <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 9 4v6c0 5-9 10-9 10S3 17 3 12V6l9-4Zm-4 9 3 3 5-6"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></symbol>
       <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
       <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5"/></symbol>
       <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
@@ -52,14 +54,14 @@
           <span>智能错题本<small>SMART WRONG NOTEBOOK</small></span>
         </a>
         <nav class="desktop-nav" aria-label="主导航">
-          <a href="#features">功能亮点</a><a href="#preview">界面预览</a><a href="#deploy">开始使用</a><a href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer">在线演示</a><a href="#faq">常见问题</a>
+          <a href="#features">功能亮点</a><a href="#preview">界面预览</a><a href="#deploy">开始使用</a><a href="./download/">下载</a><a href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer">在线演示</a><a href="#faq">常见问题</a>
         </nav>
         <a class="github-link" href="https://github.com/margrop/wrong-notebook" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-github"/></svg><span>GitHub</span><svg class="icon small"><use href="#i-arrow-up"/></svg></a>
         <a class="lang-switch" href="./en/" hreflang="en" lang="en" aria-label="Switch to English">EN</a>
         <button class="menu-toggle icon-button" type="button" aria-label="打开导航" aria-expanded="false" aria-controls="mobile-nav"><svg class="icon"><use href="#i-menu"/></svg></button>
       </div>
       <nav class="mobile-nav" id="mobile-nav" aria-label="手机导航" hidden>
-        <a href="#features">功能亮点</a><a href="#preview">界面预览</a><a href="#deploy">开始使用</a><a href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer">在线演示</a><a href="#faq">常见问题</a>
+        <a href="#features">功能亮点</a><a href="#preview">界面预览</a><a href="#deploy">开始使用</a><a href="./download/">下载</a><a href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer">在线演示</a><a href="#faq">常见问题</a>
       </nav>
     </header>
 
@@ -70,7 +72,8 @@
             <p class="eyebrow pill"><span class="status-dot"></span> 给错题一个新的开始 <svg class="icon small"><use href="#i-sparkle"/></svg></p>
             <h1 id="hero-title">让每一道错题，<br>成为<span class="highlight">进步的起点<svg viewBox="0 0 420 20" aria-hidden="true"><path d="M4 12C92 1 281 1 415 9M29 17C174 8 288 8 386 13"/></svg></span>。</h1>
             <p class="hero-description">收录，只是第一步。<br>用 AI 帮你理解错因、举一反三，<br class="desktop-break">让「做过了」真正变成「学会了」。</p>
-            <div class="hero-actions"><a class="button button-primary" href="#deploy">开始使用 <svg class="icon"><use href="#i-arrow"/></svg></a><a class="button button-outline" href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-play"/></svg> 在线体验</a></div>
+            <div class="hero-actions"><a class="button button-primary" data-download-primary href="./download/"><svg class="icon"><use href="#i-download"/></svg> <span data-download-label>下载安装包</span></a><a class="button button-outline" href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-play"/></svg> 在线体验</a></div>
+            <p class="hero-download-meta"><span data-release-version>Windows · macOS · Linux · 安卓 · 飞牛OS</span> · <a href="./download/">全部系统与架构</a> · <a href="#deploy">自托管部署</a></p>
             <p class="hero-demo">演示账号 <code>demo@localhost</code> / <code>demo123456</code> · 共享数据，请勿录入个人信息</p>
             <div class="hero-notes"><span><svg class="icon small"><use href="#i-check"/></svg>源码开放</span><span><svg class="icon small"><use href="#i-check"/></svg>全平台安装包</span><span><svg class="icon small"><use href="#i-check"/></svg>手机电脑都能用</span></div>
             <a class="hero-community" href="#community"><img src="./assets/images/qq-group-qr.webp" width="360" height="360" alt="用户交流 QQ 群二维码，群号 964325781"><span><strong>用户交流 QQ 群</strong><span class="qq-number">964325781</span><small>QQ 扫码加入，交流用法与建议</small></span></a>
@@ -155,7 +158,7 @@ docker run -d --name wrong-notebook \
 <li><strong>Linux</strong><span>x86_64 / arm64 的 <code>.AppImage</code> 与 <code>.deb</code></span></li>
 <li><strong>飞牛OS</strong><span>先在应用中心安装 Node.js v24，再手动安装 x86 / arm 的 <code>.fpk</code>，局域网访问 39300 端口</span></li>
 <li><strong>安卓</strong><span>单机版：手机 <code>-Android-Phone-版本.apk</code>，平板 <code>-Android-Tablet-版本.apk</code>，内置服务端，无需部署；客户端版 <code>-Android-Client-Phone/Tablet-版本.apk</code> 连接自己的服务器</span></li>
-</ul><div class="terminal-note"><span class="status-dot"></span> 在 <a href="https://github.com/margrop/wrong-notebook/releases" target="_blank" rel="noopener noreferrer">GitHub Releases</a> 下载对应平台的文件</div></div><div class="code-panel" id="install-panel-npm" role="tabpanel" aria-labelledby="install-npm" tabindex="0" hidden><div class="code-heading"><span>需要 Node.js 22.15+，适合服务器或已有 Node 环境</span><button class="copy-button" type="button" data-copy="npm-code"><svg class="icon small"><use href="#i-copy"/></svg><span>复制命令</span></button></div><pre><code id="npm-code">npm install -g wrong-notebook
+</ul><div class="terminal-note"><span class="status-dot"></span> 在<a href="./download/">下载页</a>自动匹配你的系统与架构，或前往 <a href="https://github.com/margrop/wrong-notebook/releases" target="_blank" rel="noopener noreferrer">GitHub Releases</a></div></div><div class="code-panel" id="install-panel-npm" role="tabpanel" aria-labelledby="install-npm" tabindex="0" hidden><div class="code-heading"><span>需要 Node.js 22.15+，适合服务器或已有 Node 环境</span><button class="copy-button" type="button" data-copy="npm-code"><svg class="icon small"><use href="#i-copy"/></svg><span>复制命令</span></button></div><pre><code id="npm-code">npm install -g wrong-notebook
 
 <span class="code-comment"># 数据默认保存在 ~/.wrong-notebook</span>
 wrong-notebook --port 3000</code></pre><div class="terminal-note"><span class="status-dot"></span> 启动后访问 <code>http://localhost:3000</code></div></div><div class="code-panel" id="install-panel-source" role="tabpanel" aria-labelledby="install-source" tabindex="0" hidden><div class="code-heading"><span>需要 Node.js 22+ 与 npm</span><button class="copy-button" type="button" data-copy="source-code"><svg class="icon small"><use href="#i-copy"/></svg><span>复制命令</span></button></div><pre><code id="source-code">git clone https://github.com/margrop/wrong-notebook.git

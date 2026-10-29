@@ -21,6 +21,7 @@
     <link rel="preload" as="image" href="../assets/images/en/notebook.webp" fetchpriority="high">
     <link rel="stylesheet" href="../assets/styles.css">
     <script src="../assets/site.js" defer></script>
+    <script src="../assets/download.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -38,6 +39,7 @@
       <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 8V3h10v5M7 17H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-3M7 13h10v8H7v-8Zm11-2h1"/></symbol>
       <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 3h8l10 10-8 8L3 11V3Zm4 4h.01"/></symbol>
       <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 9 4v6c0 5-9 10-9 10S3 17 3 12V6l9-4Zm-4 9 3 3 5-6"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></symbol>
       <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
       <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5"/></symbol>
       <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
@@ -52,14 +54,14 @@
           <span>Wrong Notebook<small>智能错题本</small></span>
         </a>
         <nav class="desktop-nav" aria-label="Main navigation">
-          <a href="#features">Features</a><a href="#preview">Screenshots</a><a href="#deploy">Get started</a><a href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a><a href="#faq">FAQ</a>
+          <a href="#features">Features</a><a href="#preview">Screenshots</a><a href="#deploy">Get started</a><a href="./download/">Download</a><a href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a><a href="#faq">FAQ</a>
         </nav>
         <a class="github-link" href="https://github.com/margrop/wrong-notebook" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-github"/></svg><span>GitHub</span><svg class="icon small"><use href="#i-arrow-up"/></svg></a>
         <a class="lang-switch" href="../" hreflang="zh-CN" lang="zh-CN" aria-label="切换到简体中文">中文</a>
         <button class="menu-toggle icon-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav"><svg class="icon"><use href="#i-menu"/></svg></button>
       </div>
       <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
-        <a href="#features">Features</a><a href="#preview">Screenshots</a><a href="#deploy">Get started</a><a href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a><a href="#faq">FAQ</a>
+        <a href="#features">Features</a><a href="#preview">Screenshots</a><a href="#deploy">Get started</a><a href="./download/">Download</a><a href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a><a href="#faq">FAQ</a>
       </nav>
     </header>
 
@@ -70,7 +72,8 @@
             <p class="eyebrow pill"><span class="status-dot"></span> A fresh start for every mistake <svg class="icon small"><use href="#i-sparkle"/></svg></p>
             <h1 id="hero-title">Turn every mistake <br>into a <span class="highlight">step forward<svg viewBox="0 0 420 20" aria-hidden="true"><path d="M4 12C92 1 281 1 415 9M29 17C174 8 288 8 386 13"/></svg></span>.</h1>
             <p class="hero-description">Saving a mistake is only the first step.<br class="desktop-break"> AI helps you see why it went wrong and practice more like it,<br class="desktop-break"> so "I've done this" becomes "I've got this".</p>
-            <div class="hero-actions"><a class="button button-primary" href="#deploy">Get started <svg class="icon"><use href="#i-arrow"/></svg></a><a class="button button-outline" href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-play"/></svg> Try the demo</a></div>
+            <div class="hero-actions"><a class="button button-primary" data-download-primary href="./download/"><svg class="icon"><use href="#i-download"/></svg> <span data-download-label>Download</span></a><a class="button button-outline" href="https://wrong-notebook-demo.vercel.app" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-play"/></svg> Try the demo</a></div>
+            <p class="hero-download-meta"><span data-release-version>Windows · macOS · Linux · Android · fnOS</span> · <a href="./download/">All platforms</a> · <a href="#deploy">Self-hosting</a></p>
             <p class="hero-demo">Demo account <code>demo@localhost</code> / <code>demo123456</code> · Shared data, please don't enter personal information</p>
             <div class="hero-notes"><span><svg class="icon small"><use href="#i-check"/></svg>Open source</span><span><svg class="icon small"><use href="#i-check"/></svg>Installers for every platform</span><span><svg class="icon small"><use href="#i-check"/></svg>Phone and computer</span></div>
             <a class="hero-community" href="#community"><img src="../assets/images/qq-group-qr.webp" width="360" height="360" alt="QQ user group QR code, group number 964325781"><span><strong>QQ user group</strong><span class="qq-number">964325781</span><small>Scan with QQ to join (mainly Chinese)</small></span></a>
@@ -155,7 +158,7 @@ docker run -d --name wrong-notebook \
 <li><strong>Linux</strong><span><code>.AppImage</code> and <code>.deb</code> for x86_64 / arm64</span></li>
 <li><strong>fnOS</strong><span>Install Node.js v24 from the app center first, then install the x86 / arm <code>.fpk</code> manually; open port 39300 on your LAN</span></li>
 <li><strong>Android</strong><span>Standalone: phone <code>-Android-Phone-version.apk</code>, tablet <code>-Android-Tablet-version.apk</code>, with the server built in; client <code>-Android-Client-Phone/Tablet-version.apk</code> connects to your own server</span></li>
-</ul><div class="terminal-note"><span class="status-dot"></span> Download the file for your platform from <a href="https://github.com/margrop/wrong-notebook/releases" target="_blank" rel="noopener noreferrer">GitHub Releases</a></div></div><div class="code-panel" id="install-panel-npm" role="tabpanel" aria-labelledby="install-npm" tabindex="0" hidden><div class="code-heading"><span>Needs Node.js 22.15+, for servers or existing Node setups</span><button class="copy-button" type="button" data-copy="npm-code"><svg class="icon small"><use href="#i-copy"/></svg><span>Copy</span></button></div><pre><code id="npm-code">npm install -g wrong-notebook
+</ul><div class="terminal-note"><span class="status-dot"></span> The <a href="./download/">download page</a> picks the right file for your system, or browse <a href="https://github.com/margrop/wrong-notebook/releases" target="_blank" rel="noopener noreferrer">GitHub Releases</a></div></div><div class="code-panel" id="install-panel-npm" role="tabpanel" aria-labelledby="install-npm" tabindex="0" hidden><div class="code-heading"><span>Needs Node.js 22.15+, for servers or existing Node setups</span><button class="copy-button" type="button" data-copy="npm-code"><svg class="icon small"><use href="#i-copy"/></svg><span>Copy</span></button></div><pre><code id="npm-code">npm install -g wrong-notebook
 
 <span class="code-comment"># Data is stored in ~/.wrong-notebook by default</span>
 wrong-notebook --port 3000</code></pre><div class="terminal-note"><span class="status-dot"></span> Then open <code>http://localhost:3000</code></div></div><div class="code-panel" id="install-panel-source" role="tabpanel" aria-labelledby="install-source" tabindex="0" hidden><div class="code-heading"><span>Needs Node.js 22+ and npm</span><button class="copy-button" type="button" data-copy="source-code"><svg class="icon small"><use href="#i-copy"/></svg><span>Copy</span></button></div><pre><code id="source-code">git clone https://github.com/margrop/wrong-notebook.git

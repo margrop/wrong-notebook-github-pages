@@ -1,6 +1,6 @@
 # 智能错题本 · 项目官网
 
-用于介绍和宣传 [margrop/wrong-notebook](https://github.com/margrop/wrong-notebook) 的官方网站，提供简体中文（首页）和英文（`en/`）两个版本。基于相邻 `../wrong-notebook` 项目的现有功能与真实截图制作。
+用于介绍和宣传 [margrop/wrong-notebook](https://github.com/margrop/wrong-notebook) 的官方网站，提供简体中文（首页）和英文（`en/`）两个版本，并各有一个下载页（`download/`、`en/download/`）。基于相邻 `../wrong-notebook` 项目的现有功能与真实截图制作。
 
 官网地址：**<https://blog.margrop.net/wrong-notebook-github-pages/>**，英文版 <https://blog.margrop.net/wrong-notebook-github-pages/en/>（GitHub Pages 继承账号现有的自定义域名。）
 
@@ -35,6 +35,7 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 - 截图标签支持方向键、Home / End，图片可点击放大，Esc 关闭。
 - 在线演示站入口与演示账号说明。
 - Docker / 安装包（Windows、macOS、Linux、飞牛OS）/ npm / 本地源码四种部署方式切换，命令复制与受限环境下的手动复制回退。
+- 下载：首页主按钮与下载页自动识别访客的系统与架构（Windows、macOS Apple 芯片 / Intel、Linux x86_64 / arm64、安卓手机 / 平板、iPhone / iPad），通过 GitHub API 读取最新正式版并直接链接到对应安装包、显示文件大小；下载页完整列出全部系统与架构的安装包。识别优先使用浏览器的 UA Client Hints，Safari / Firefox 上的 Mac 依据 WebGL 显卡名称区分芯片，无法确定时按 Apple 芯片处理并提示。脚本未运行或 GitHub 接口不可用时，按钮回退到 Releases 页面。
 - 常见问题折叠面板、手机导航、当前章节高亮。
 - 手机、平板与桌面布局，减少动态效果偏好、语义化标签与键盘操作。
 - 页头和页脚可切换中英文，发布时自动生成 `hreflang` 语言版本声明；两个页面共用样式与脚本，脚本按 `<html lang>` 选择提示文字。
@@ -45,8 +46,11 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 ```text
 index.html                  中文页面内容与语义结构
 en/index.html               英文页面（资源以 ../assets/ 引用）
+download/index.html         中文下载页
+en/download/index.html      英文下载页（资源以 ../../assets/ 引用）
 assets/styles.css           布局、视觉与响应式样式
 assets/site.js              预览、弹窗、标签、导航与复制
+assets/download.js          系统与架构识别、最新版本安装包链接（首页与下载页共用）
 assets/images/              已脱敏的真实界面与分享图
 assets/icons/               原项目应用图标
 scripts/build.py            生成 dist 发布文件
