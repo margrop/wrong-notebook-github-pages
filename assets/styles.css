@@ -70,6 +70,14 @@ h1 { font-size: clamp(36px, 4.15vw, 59px); font-weight: 780; line-height: 1.4; l
 .hero-notes { display: flex; gap: 19px; margin-top: 24px; color: #716a7a; font-size: 11px; }
 .hero-notes span { display: flex; gap: 4px; align-items: center; }
 .hero-notes .icon { width: 13px; height: 13px; color: #9182ac; }
+.hero-community { display: inline-flex; align-items: center; gap: 14px; margin-top: 22px; padding: 8px 18px 8px 8px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.hero-community:hover { border-color: var(--purple); }
+.hero-community img { flex: none; width: 96px; height: 96px; border-radius: 10px; }
+.hero-community > span { display: flex; flex-direction: column; gap: 3px; text-align: left; }
+.hero-community strong { font-size: 12px; }
+.hero-community .qq-number { color: var(--purple); font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.hero-community small { color: var(--muted); font-size: 11px; }
+#community { scroll-margin-top: 90px; }
 .hero-visual { position: relative; min-width: 0; padding-top: 42px; padding-bottom: 55px; }
 .orbit { position: absolute; border: 1px dashed #c9bfe1; border-radius: 50%; z-index: 0; pointer-events: none; }
 .orbit-one { width: 410px; height: 410px; top: 0; right: -16px; transform: rotate(-30deg); }
