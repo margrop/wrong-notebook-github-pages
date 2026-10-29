@@ -235,6 +235,13 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 100px; }
 .faq-section h2 { font-size: 37px; }
 .faq-section .text-link { margin-top: 24px; }
+.community-card { display: flex; align-items: center; gap: 18px; width: fit-content; max-width: 100%; margin-top: 30px; padding: 14px 20px 14px 14px; background: #fff; border: 1px solid var(--line); border-radius: 18px; }
+.community-card:hover { border-color: var(--purple); }
+.community-card img { flex: none; width: 150px; height: auto; border-radius: 12px; }
+.community-card > span { display: flex; flex-direction: column; gap: 6px; max-width: 170px; }
+.community-card strong { font-size: 13px; }
+.community-card .qq-number { color: var(--purple); font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.community-card small { color: var(--muted); font-size: 11px; line-height: 1.7; }
 .faq-list details { border-bottom: 1px solid #e1dedf; }
 .faq-list details:first-child { border-top: 1px solid #e1dedf; }
 .faq-list summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 21px 0; cursor: pointer; font-size: 13px; font-weight: 550; list-style: none; }
