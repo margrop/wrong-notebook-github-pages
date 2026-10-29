@@ -5,8 +5,8 @@ const isEnglish = document.documentElement.lang.startsWith("en");
 // 英文页使用 images/en/ 下的英文界面与英文演示内容截图
 const imageDir = isEnglish ? "en/" : "";
 const text = isEnglish
-  ? { enlarge: (title) => `Enlarge screenshot: ${title}`, copied: "Command copied. Paste it into your terminal.", copyManually: "Press Ctrl+C / ⌘C to copy the selected command", openNav: "Open navigation", closeNav: "Close navigation" }
-  : { enlarge: (title) => `放大${title}截图`, copied: "命令已复制，可粘贴到终端运行", copyManually: "请按 Ctrl+C / ⌘C 复制已选中的命令", openNav: "打开导航", closeNav: "关闭导航" };
+  ? { enlarge: (title) => `Enlarge screenshot: ${title}`, copied: "Command copied. Paste it into your terminal.", copyManually: "Press Ctrl+C / ⌘C to copy the selected command" }
+  : { enlarge: (title) => `放大${title}截图`, copied: "命令已复制，可粘贴到终端运行", copyManually: "请按 Ctrl+C / ⌘C 复制已选中的命令" };
 
 // 所有预览素材均采集于原应用；英文版使用独立的英文演示数据。
 const screenshots = isEnglish ? {
@@ -131,28 +131,6 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
     }
   });
 });
-
-const menuToggle = document.querySelector(".menu-toggle");
-const mobileNav = document.getElementById("mobile-nav");
-function closeMenu() {
-  mobileNav.hidden = true;
-  menuToggle.setAttribute("aria-expanded", "false");
-  menuToggle.setAttribute("aria-label", text.openNav);
-}
-menuToggle.addEventListener("click", () => {
-  const open = menuToggle.getAttribute("aria-expanded") !== "true";
-  mobileNav.hidden = !open;
-  menuToggle.setAttribute("aria-expanded", String(open));
-  menuToggle.setAttribute("aria-label", open ? text.closeNav : text.openNav);
-});
-mobileNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !mobileNav.hidden) {
-    closeMenu();
-    menuToggle.focus();
-  }
-});
-window.matchMedia("(min-width: 681px)").addEventListener("change", (event) => { if (event.matches) closeMenu(); });
 
 // 未启用脚本时仍显示主体内容；增强功能就绪后才跟踪导航高亮。
 if ("IntersectionObserver" in window) {
