@@ -91,7 +91,7 @@
                 <a class="dl-button" data-asset="mac-arm64-zip" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>Apple silicon · arm64</strong><small>.zip archive</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
                 <a class="dl-button" data-asset="mac-x64-zip" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>Intel · x64</strong><small>.zip archive</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
               </div>
-              <p class="download-note">The app is unsigned. The first time, right-click it and choose “Open”, or run <code>xattr -dr com.apple.quarantine /Applications/WrongNotebook.app</code>. Not sure which chip you have? Check “About This Mac”.</p>
+              <p class="download-note">The app is not signed by Apple. If macOS says it is damaged or can’t be opened, move it to Applications and run <code>xattr -cr /Applications/WrongNotebook.app</code> and <code>codesign --force --deep --sign - /Applications/WrongNotebook.app</code> in Terminal, then open it. Not sure which chip you have? Check “About This Mac”.</p>
             </article>
 
             <article class="download-card" data-platform="linux" aria-labelledby="dl-linux">
