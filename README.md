@@ -31,6 +31,7 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 
 ## 页面与交互
 
+- 中英文首页与下载页提供 Code signing policy 和隐私说明链接；Windows 签名申请尚未获批时如实显示当前未签名状态。
 - 首页主视觉、四步学习流程、功能卡片、六组真实界面预览。
 - 截图标签支持方向键、Home / End，图片可点击放大，Esc 关闭。
 - 在线演示站入口与演示账号说明。

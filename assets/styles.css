@@ -275,7 +275,7 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 31px; border-bottom: 1px solid var(--line); }
 .site-footer .brand > span { font-size: 16px; }
 .site-footer .brand small { font-size: 9px; font-weight: 400; letter-spacing: .04em; }
-.footer-top nav { display: flex; align-items: center; gap: 26px; font-size: 11px; color: #74677d; }
+.footer-top nav { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; font-size: 11px; color: #74677d; }
 .footer-top nav a { display: flex; gap: 4px; align-items: center; }
 .footer-top nav a .icon { width: 12px; height: 12px; }
 .site-footer a:hover { color: var(--purple); }
