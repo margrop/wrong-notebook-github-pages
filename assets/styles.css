@@ -48,6 +48,14 @@ h1, h2, h3, p, figure { margin: 0; }
 .menu-toggle, .mobile-nav { display: none; }
 .lang-switch { margin-left: -12px; padding: 9px 4px; color: #64616c; font-size: 13px; font-weight: 600; white-space: nowrap; transition: color .2s; }
 .lang-switch:hover { color: var(--purple); }
+.header-actions { display: flex; align-items: center; gap: 6px; margin-left: -12px; }
+.header-actions .lang-switch { margin-left: 0; }
+.theme-toggle { padding: 8px; color: #64616c; transition: color .2s; }
+.theme-toggle:hover { color: var(--purple); }
+.theme-toggle .icon { width: 20px; height: 20px; }
+.theme-toggle .theme-icon-light, .theme-toggle .theme-icon-dark { display: none; }
+html[data-theme-preference="light"] .theme-toggle .theme-icon-system, html[data-theme-preference="dark"] .theme-toggle .theme-icon-system { display: none; }
+html[data-theme-preference="light"] .theme-toggle .theme-icon-light, html[data-theme-preference="dark"] .theme-toggle .theme-icon-dark { display: inline-block; }
 html:lang(en) h1 { letter-spacing: -.035em; }
 .hero { overflow: hidden; position: relative; background: radial-gradient(ellipse at 84% 24%, #eae5f8a3, transparent 43%); }
 .hero-grid { display: grid; grid-template-columns: 1fr 1.08fr; gap: 38px; align-items: center; padding-top: 62px; padding-bottom: 52px; min-height: 630px; }
@@ -429,6 +437,8 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
   .github-link { margin-left: auto; font-size: 11px; border: 0; background: none; padding: 7px 0; gap: 6px; }
   .github-link .icon { width: 17px; height: 17px; }
   .lang-switch { margin-left: 0; padding: 7px 2px; font-size: 12px; }
+  .header-actions { margin-left: 0; gap: 2px; }
+  .theme-toggle { padding: 6px; }
   html:lang(en) .desktop-break { display: none; }
   .menu-toggle { display: inline-flex; padding: 7px 0 7px 5px; }
   .menu-toggle .icon { width: 23px; height: 23px; color: #797180; }
@@ -576,6 +586,9 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 }
 @media (max-width: 360px) {
   .container { width: calc(100% - 32px); }
+  .header-inner { gap: 8px; }
+  .theme-toggle { padding: 4px; }
+  .theme-toggle .icon { width: 18px; height: 18px; }
   .hero-notes { gap: 10px; font-size: 8px; }
   .hero-actions .button { padding-inline: 13px; }
   .review-note .mini-trend { display: none; }

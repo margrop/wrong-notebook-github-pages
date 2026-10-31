@@ -38,6 +38,7 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 - Docker / 安装包（Windows、macOS、Linux、飞牛OS）/ npm / 本地源码四种部署方式切换，命令复制与受限环境下的手动复制回退。
 - 下载：首页主按钮与下载页自动识别访客的系统与架构（Windows、macOS Apple 芯片 / Intel、Linux x86_64 / arm64、安卓手机 / 平板、iPhone / iPad），通过 GitHub API 读取最新正式版并直接链接到对应安装包、显示文件大小；下载页完整列出全部系统与架构的安装包。识别优先使用浏览器的 UA Client Hints，Safari / Firefox 上的 Mac 依据 WebGL 显卡名称区分芯片，无法确定时按 Apple 芯片处理并提示。脚本未运行或 GitHub 接口不可用时，按钮回退到 Releases 页面。
 - 常见问题折叠面板、手机导航、当前章节高亮。
+- 深色模式：页头的主题按钮在「自动（跟随系统）→ 浅色 → 深色」之间切换，默认自动，选择只保存在本浏览器（localStorage）。首屏由 `<head>` 中的内联脚本设置主题，避免闪烁。深色样式由 `python3 scripts/dark_css.py` 根据 `styles.css` 自动换算生成，修改 `styles.css` 后需重新运行；换算不理想的地方写在脚本的 `MANUAL` 中。
 - 手机、平板与桌面布局，减少动态效果偏好、语义化标签与键盘操作。
 - 页头和页脚可切换中英文，发布时自动生成 `hreflang` 语言版本声明；两个页面共用样式与脚本，脚本按 `<html lang>` 选择提示文字。
 - 本地图标、WebP 截图、分享图、搜索引擎描述，无外部字体、统计或 CDN 脚本。
@@ -50,12 +51,15 @@ en/index.html               英文页面（资源以 ../assets/ 引用）
 download/index.html         中文下载页
 en/download/index.html      英文下载页（资源以 ../../assets/ 引用）
 assets/styles.css           布局、视觉与响应式样式
+assets/dark.css             深色模式样式（由 scripts/dark_css.py 生成，勿直接修改）
+assets/theme.js             深色模式切换
 assets/site.js              预览、弹窗、标签、导航与复制
 assets/download.js          系统与架构识别、最新版本安装包链接（首页与下载页共用）
 assets/images/              已脱敏的真实界面与分享图
 assets/icons/               原项目应用图标
 scripts/build.py            生成 dist 发布文件
 scripts/check_site.py       资源、锚点、ARIA 与子路径检查
+scripts/dark_css.py         由 styles.css 生成 dark.css；加 --check 检查是否同步
 .github/workflows/pages.yml GitHub Pages 检查及发布
 ```
 
