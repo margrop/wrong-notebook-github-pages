@@ -2,7 +2,7 @@
 
 用于介绍和宣传 [margrop/wrong-notebook](https://github.com/margrop/wrong-notebook) 的官方网站，提供简体中文（首页）和英文（`en/`）两个版本，并各有一个下载页（`download/`、`en/download/`）。基于相邻 `../wrong-notebook` 项目的现有功能与真实截图制作。
 
-官网地址：**<https://blog.margrop.net/wrong-notebook-github-pages/>**，英文版 <https://blog.margrop.net/wrong-notebook-github-pages/en/>（GitHub Pages 继承账号现有的自定义域名。）
+官网地址：**<https://wrong-notebook.margrop.net/>**，英文版 <https://wrong-notebook.margrop.net/en/>。仓库在 GitHub Pages 设置中绑定了自定义域名（Cloudflare 中 `wrong-notebook` CNAME 指向 `margrop.github.io`，仅 DNS）；原地址 `https://blog.margrop.net/wrong-notebook-github-pages/` 由 GitHub 按原路径 301 跳转到新域名，旧链接继续可用。构建时的 `SITE_URL` 由工作流从 Pages 配置读取，域名变化无需改动构建脚本。
 
 纯 HTML、CSS 与原生 JavaScript，无需 npm 安装或前端构建工具，可部署到 GitHub Pages 的根域名、项目子路径及其他静态托管服务。
 
