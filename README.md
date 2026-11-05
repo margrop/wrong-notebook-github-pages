@@ -1,6 +1,6 @@
 # 智能错题本 · 项目官网
 
-用于介绍和宣传 [margrop/wrong-notebook](https://github.com/margrop/wrong-notebook) 的官方网站，提供简体中文（首页）和英文（`en/`）两个版本，并各有一个下载页（`download/`、`en/download/`）。基于相邻 `../wrong-notebook` 项目的现有功能与真实截图制作。
+用于介绍和宣传 [margrop/wrong-notebook](https://github.com/margrop/wrong-notebook) 的官方网站，提供简体中文（首页）和英文（`en/`）两个版本，并各有一个下载页（`download/`、`en/download/`）和隐私政策页（`privacy/`、`en/privacy/`）。基于相邻 `../wrong-notebook` 项目的现有功能与真实截图制作。
 
 官网地址：**<https://wrong-notebook.margrop.net/>**，英文版 <https://wrong-notebook.margrop.net/en/>。仓库在 GitHub Pages 设置中绑定了自定义域名（Cloudflare 中 `wrong-notebook` CNAME 指向 `margrop.github.io`，仅 DNS）；原地址 `https://blog.margrop.net/wrong-notebook-github-pages/` 由 GitHub 按原路径 301 跳转到新域名，旧链接继续可用。构建时的 `SITE_URL` 由工作流从 Pages 配置读取，域名变化无需改动构建脚本。
 
@@ -31,7 +31,8 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 
 ## 页面与交互
 
-- 中英文首页与下载页提供 Code signing policy 和隐私说明链接；Windows 安装包在启用 SignPath 生产证书签名前如实显示未签名状态。
+- 隐私政策页（`privacy/`、`en/privacy/`）由主项目的 `doc/PRIVACY.md`、`doc/PRIVACY.en.md` 生成：隐私说明改动后运行 `python3 scripts/privacy_pages.py ../wrong-notebook/doc` 并提交生成的页面。应用内与商店填写的隐私政策地址均指向此页。
+- 中英文首页与下载页提供 Code signing policy 和隐私政策链接；Windows 安装包在启用 SignPath 生产证书签名前如实显示未签名状态。
 - 首页主视觉、四步学习流程、功能卡片、六组真实界面预览。
 - 截图标签支持方向键、Home / End，图片可点击放大，Esc 关闭。
 - 在线演示站入口与演示账号说明。

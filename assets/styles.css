@@ -688,3 +688,21 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
   .download-card { padding: 18px; }
   .dl-list { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* 隐私政策等长文页面 */
+.legal-page { padding: 64px 0 72px; }
+.legal-container { max-width: 820px; }
+.legal-page h1 { white-space: normal; font-size: clamp(32px, 4vw, 48px); margin-top: 12px; }
+.legal-meta { margin-top: 14px; font-size: 13px; color: var(--muted); }
+.legal-body { margin-top: 28px; font-size: 15px; line-height: 1.9; }
+.legal-body h2 { font-size: 22px; margin: 36px 0 12px; }
+.legal-body p { margin: 12px 0; }
+.legal-body ul { margin: 12px 0; padding-left: 1.4em; }
+.legal-body li { margin: 8px 0; }
+.legal-body a, .legal-meta a { color: var(--purple); text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
+.legal-body code { font-size: .92em; padding: 1px 5px; border-radius: 4px; border: 1px solid var(--line); overflow-wrap: anywhere; }
+@media (max-width: 680px) {
+  .legal-page { padding: 36px 0 48px; }
+  .legal-body { font-size: 14px; }
+  .legal-body h2 { font-size: 19px; }
+}

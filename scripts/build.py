@@ -17,6 +17,8 @@ PAGES = [
     ("en/index.html", "en/", "en", "home"),
     ("download/index.html", "download/", "zh-CN", "download"),
     ("en/download/index.html", "en/download/", "en", "download"),
+    ("privacy/index.html", "privacy/", "zh-CN", "privacy"),
+    ("en/privacy/index.html", "en/privacy/", "en", "privacy"),
 ]
 
 
