@@ -141,6 +141,23 @@
               </div>
               <p class="download-note">Set the admin email and password in the install wizard, then open port 39300 on your local network.</p>
             </article>
+            <article class="download-card" data-platform="synology" aria-labelledby="dl-synology">
+              <div class="download-card-head"><svg class="icon"><use href="#i-server"/></svg><h3 id="dl-synology">Synology DSM</h3></div>
+              <p class="download-requirement">Install Container Manager from Package Center first, then install the .spk manually</p>
+              <div class="dl-list">
+                <a class="dl-button" data-asset="synology-spk" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>noarch · SPK</strong><small>Docker package, DSM 7.0+</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+              </div>
+              <p class="download-note">The package pulls the matching image and maps port 39300; data stays in <code>docker/wrong-notebook</code> on the package volume and survives uninstall.</p>
+            </article>
+
+            <article class="download-card" data-platform="qnap" aria-labelledby="dl-qnap">
+              <div class="download-card-head"><svg class="icon"><use href="#i-server"/></svg><h3 id="dl-qnap">QNAP QTS</h3></div>
+              <p class="download-requirement">Install Container Station from App Center first, then install the .qpkg manually</p>
+              <div class="dl-list">
+                <a class="dl-button" data-asset="qnap-qpkg" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>noarch · QPKG</strong><small>Docker package, QTS 4.x</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+              </div>
+              <p class="download-note">The package pulls the matching image and maps port 39300; data stays in <code>/share/Container/wrong-notebook</code> and survives uninstall.</p>
+            </article>
 
             <article class="download-card" data-platform="ios" aria-labelledby="dl-ios">
               <div class="download-card-head"><svg class="icon"><use href="#i-phone"/></svg><h3 id="dl-ios">iPhone / iPad</h3><span class="detected-badge">Your system</span></div>

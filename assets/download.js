@@ -26,6 +26,8 @@
     "android-client-tablet": /^WrongNotebook-Android-Client-Tablet-.+\.apk$/,
     "fnos-x86": /^WrongNotebook-FnOS-.+-x86\.fpk$/,
     "fnos-arm": /^WrongNotebook-FnOS-.+-arm\.fpk$/,
+    "synology-spk": /^WrongNotebook-Synology-.+\.spk$/,
+    "qnap-qpkg": /^WrongNotebook-QNAP-.+\.qpkg$/,
     "npm-tgz": /^wrong-notebook-.+\.tgz$/,
     checksums: /^SHA256SUMS\.txt$/,
   };
