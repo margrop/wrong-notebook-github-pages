@@ -145,18 +145,20 @@
               <div class="download-card-head"><svg class="icon"><use href="#i-server"/></svg><h3 id="dl-synology">Synology DSM</h3></div>
               <p class="download-requirement">Install Container Manager from Package Center first, then install the .spk manually</p>
               <div class="dl-list">
-                <a class="dl-button" data-asset="synology-spk" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>noarch · SPK</strong><small>Docker package, DSM 7.0+</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+                <a class="dl-button" data-asset="synology-x86_64" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>x86_64 · SPK</strong><small>NAS with an Intel / AMD processor, DSM 7.2.1+</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+                <a class="dl-button" data-asset="synology-arm64" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>arm64 · SPK</strong><small>NAS with a 64-bit ARM processor, DSM 7.2.1+</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
               </div>
-              <p class="download-note">The package pulls the matching image and maps port 39300; data stays in <code>docker/wrong-notebook</code> on the package volume and survives uninstall.</p>
+              <p class="download-note">The package bundles the matching image, so nothing is downloaded during installation; it maps port 39300, and data stays in the package data directory <code>@appdata/wrongnotebook</code> and survives uninstall.</p>
             </article>
 
             <article class="download-card" data-platform="qnap" aria-labelledby="dl-qnap">
               <div class="download-card-head"><svg class="icon"><use href="#i-server"/></svg><h3 id="dl-qnap">QNAP QTS</h3></div>
               <p class="download-requirement">Install Container Station from App Center first, then install the .qpkg manually</p>
               <div class="dl-list">
-                <a class="dl-button" data-asset="qnap-qpkg" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>noarch · QPKG</strong><small>Docker package, QTS 4.x</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+                <a class="dl-button" data-asset="qnap-x86_64" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>x86_64 · QPKG</strong><small>NAS with an Intel / AMD processor</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+                <a class="dl-button" data-asset="qnap-arm64" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>arm64 · QPKG</strong><small>NAS with a 64-bit ARM processor</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
               </div>
-              <p class="download-note">The package pulls the matching image and maps port 39300; data stays in <code>/share/Container/wrong-notebook</code> and survives uninstall.</p>
+              <p class="download-note">The package bundles the matching image, so nothing is downloaded during installation; it maps port 39300, and data stays in <code>/share/Container/wrong-notebook</code> and survives uninstall.</p>
             </article>
 
             <article class="download-card" data-platform="ios" aria-labelledby="dl-ios">

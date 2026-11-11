@@ -145,18 +145,20 @@
               <div class="download-card-head"><svg class="icon"><use href="#i-server"/></svg><h3 id="dl-synology">群晖 DSM</h3></div>
               <p class="download-requirement">先在套件中心安装 Container Manager，再手动安装 .spk</p>
               <div class="dl-list">
-                <a class="dl-button" data-asset="synology-spk" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>noarch · SPK</strong><small>Docker 套件，DSM 7.0+</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+                <a class="dl-button" data-asset="synology-x86_64" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>x86_64 · SPK</strong><small>Intel / AMD 处理器的 NAS，DSM 7.2.1+</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+                <a class="dl-button" data-asset="synology-arm64" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>arm64 · SPK</strong><small>64 位 ARM 处理器的 NAS，DSM 7.2.1+</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
               </div>
-              <p class="download-note">套件拉取同版本镜像，映射端口 39300；数据保存在套件所在存储卷的 <code>docker/wrong-notebook</code>，卸载套件不删除。</p>
+              <p class="download-note">套件内置同版本镜像，安装时无需联网拉取；映射端口 39300，数据保存在套件数据目录 <code>@appdata/wrongnotebook</code>，卸载套件不删除。</p>
             </article>
 
             <article class="download-card" data-platform="qnap" aria-labelledby="dl-qnap">
               <div class="download-card-head"><svg class="icon"><use href="#i-server"/></svg><h3 id="dl-qnap">威联通 QTS</h3></div>
               <p class="download-requirement">先在 App Center 安装 Container Station，再手动安装 .qpkg</p>
               <div class="dl-list">
-                <a class="dl-button" data-asset="qnap-qpkg" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>noarch · QPKG</strong><small>Docker 套件，QTS 4.x</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+                <a class="dl-button" data-asset="qnap-x86_64" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>x86_64 · QPKG</strong><small>Intel / AMD 处理器的 NAS</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
+                <a class="dl-button" data-asset="qnap-arm64" href="https://github.com/margrop/wrong-notebook/releases/latest"><span><strong>arm64 · QPKG</strong><small>64 位 ARM 处理器的 NAS</small></span><span class="dl-size" data-size></span><svg class="icon"><use href="#i-download"/></svg></a>
               </div>
-              <p class="download-note">套件拉取同版本镜像，映射端口 39300；数据保存在 <code>/share/Container/wrong-notebook</code>，卸载套件不删除。</p>
+              <p class="download-note">套件内置同版本镜像，安装时无需联网拉取；映射端口 39300，数据保存在 <code>/share/Container/wrong-notebook</code>，卸载套件不删除。</p>
             </article>
 
             <article class="download-card" data-platform="ios" aria-labelledby="dl-ios">
