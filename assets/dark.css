@@ -152,6 +152,7 @@ html[data-theme="dark"] .hero-download-meta { color: #aaa3b3; }
 html[data-theme="dark"] .hero-download-meta a { color: #b5a1ca; }
 html[data-theme="dark"] .download-hero { background: radial-gradient(ellipse at 84% 10%, #1d172ea3, transparent 50%); }
 html[data-theme="dark"] .download-detect { border: 1px solid #1e1437; background: #1e1b18; }
+html[data-theme="dark"] .download-source-picker select { border: 1px solid #282136; }
 html[data-theme="dark"] .download-cta .dl-size { color: #ffffffc0; }
 html[data-theme="dark"] .download-card { border: 1px solid #2d2a23; background: #1e1b18; }
 html[data-theme="dark"] .download-card.is-detected { box-shadow: 0 0 0 3px #1e009d1a; }

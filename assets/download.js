@@ -1,12 +1,30 @@
 "use strict";
 
 // 首页下载按钮与下载页共用：识别访客的系统与架构，从 GitHub 最新正式版中挑选对应安装包。
-// 未启用脚本或 GitHub 接口不可用时，所有按钮保持指向 Releases 页面的默认链接。
+// 中国大陆访客会自动测速可用的第三方线路；未启用脚本或 GitHub 接口不可用时保持 Releases 默认链接。
 (() => {
   const RELEASE_API = "https://api.github.com/repos/margrop/wrong-notebook/releases/latest";
   const CACHE_KEY = "wn-latest-release";
   const CACHE_MS = 10 * 60 * 1000;
+  const GEO_CACHE_KEY = "wn-download-geo";
+  const GEO_CACHE_MS = 30 * 60 * 1000;
+  const SOURCE_CACHE_KEY = "wn-download-auto-source";
+  const SOURCE_CACHE_MS = 10 * 60 * 1000;
+  const SOURCE_PREFERENCE_KEY = "wn-download-source-preference";
+  const GEO_TIMEOUT_MS = 3500;
+  const PROXY_TIMEOUT_MS = 5000;
+  const PROBE_TARGET = "https://raw.githubusercontent.com/margrop/wrong-notebook/main/LICENSE";
+  const PROBE_MARKER = "MIT License";
   const isEnglish = document.documentElement.lang.startsWith("en");
+
+  const SOURCES = {
+    auto: { id: "auto", prefix: "" },
+    github: { id: "github", prefix: "" },
+    ghfast: { id: "ghfast", prefix: "https://ghfast.top/" },
+    ghproxy: { id: "ghproxy", prefix: "https://gh-proxy.net/" },
+    llkk: { id: "llkk", prefix: "https://gs.llkk.cc/" },
+  };
+  const PROXY_SOURCE_IDS = ["ghfast", "ghproxy", "llkk"];
 
   // 安装包文件名带版本号，按版本无关的规则匹配
   const ASSETS = {
@@ -57,7 +75,22 @@
       "android-phone": "Download for Android phone",
       "android-tablet": "Download for Android tablet",
     },
-    detected: (system) => `Detected: ${system}`,
+    sources: {
+      auto: "Auto (China: test accelerators)",
+      github: "GitHub direct",
+      ghfast: "ghfast.top",
+      ghproxy: "gh-proxy.net",
+      llkk: "gs.llkk.cc",
+    },
+    sourceStatus: {
+      initial: "Detecting your region and testing download routes…",
+      manual: (name) => "Selected manually: " + name + ".",
+      china: (name, latency) => "China mainland detected. Using " + name + (latency ? " (about " + latency + " ms)" : "") + ".",
+      outside: "Outside mainland China detected. Using GitHub direct.",
+      unknown: "Could not identify the region. Using GitHub direct.",
+      fallback: "No accelerator passed the availability check. Using GitHub direct.",
+    },
+    detected: (system) => "Detected: " + system,
     noPackage: "No installer for iPhone / iPad yet. Open the demo in Safari or add your own server to the Home Screen.",
     unknownSystem: "We could not detect your system. Choose a package below.",
     macGuess: "Detected from the graphics chip. On an Intel Mac, choose the Intel build below.",
@@ -88,7 +121,22 @@
       "android-phone": "下载安卓手机版",
       "android-tablet": "下载安卓平板版",
     },
-    detected: (system) => `检测到：${system}`,
+    sources: {
+      auto: "自动选择（中国大陆自动测速）",
+      github: "GitHub 原版",
+      ghfast: "ghfast.top",
+      ghproxy: "gh-proxy.net",
+      llkk: "gs.llkk.cc",
+    },
+    sourceStatus: {
+      initial: "正在识别地区并测速下载线路…",
+      manual: (name) => "已手动选择：" + name + "。",
+      china: (name, latency) => "已识别为中国大陆，自动使用 " + name + (latency ? "（约 " + latency + " ms）" : "") + "。",
+      outside: "已识别为非中国大陆地区，使用 GitHub 原版。",
+      unknown: "暂时无法识别地区，使用 GitHub 原版。",
+      fallback: "加速线路均未通过可用性检查，已回退 GitHub 原版。",
+    },
+    detected: (system) => "检测到：" + system,
     noPackage: "iPhone / iPad 暂无安装包，可用 Safari 打开在线演示或自己的服务器，并添加到主屏幕。",
     unknownSystem: "未能识别你的系统，请在下方选择需要的安装包。",
     macGuess: "根据显卡信息判断；如果是 Intel 芯片的 Mac，请在下方选择 Intel 版本。",
@@ -115,6 +163,10 @@
     windows: "windows", "windows-arm": "windows", "mac-arm64": "mac", "mac-x64": "mac",
     "linux-x64": "linux", "linux-arm64": "linux", "android-phone": "android", "android-tablet": "android", ios: "ios",
   };
+
+  let selectedSourceId = "auto";
+  let activeSourceId = "github";
+  let sourceDecision = 0;
 
   // Safari 与 Firefox 不提供 CPU 架构，按 WebGL 显卡名称区分 Intel 与 Apple 芯片的 Mac；无法判断时按 Apple 芯片处理
   function macArchFromGpu() {
@@ -163,13 +215,25 @@
     return { key: "unknown" };
   }
 
-  function readCache() {
+  function readStorage(storage, key) {
     try {
-      const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || "null");
-      return cached && Date.now() - cached.time < CACHE_MS ? cached.release : null;
+      return JSON.parse(storage.getItem(key) || "null");
     } catch {
       return null;
     }
+  }
+
+  function writeStorage(storage, key, value) {
+    try {
+      storage.setItem(key, JSON.stringify(value));
+    } catch {
+      // 隐私模式或存储空间不足时不影响下载。
+    }
+  }
+
+  function readCache() {
+    const cached = readStorage(sessionStorage, CACHE_KEY);
+    return cached && Date.now() - cached.time < CACHE_MS ? cached.release : null;
   }
 
   async function loadRelease() {
@@ -184,11 +248,7 @@
       url: data.html_url,
       assets: (data.assets || []).map((asset) => ({ name: asset.name, url: asset.browser_download_url, size: asset.size })),
     };
-    try {
-      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ time: Date.now(), release }));
-    } catch {
-      // 隐私模式等无法缓存时每次重新请求
-    }
+    writeStorage(sessionStorage, CACHE_KEY, { time: Date.now(), release });
     return release;
   }
 
@@ -206,12 +266,212 @@
     document.querySelectorAll(selector).forEach((element) => { element.textContent = value; });
   }
 
+  function sourceName(id) {
+    return text.sources[id] || text.sources.github;
+  }
+
+  function hasSource(id) {
+    return typeof id === "string" && Object.prototype.hasOwnProperty.call(SOURCES, id);
+  }
+
+  function setSourceStatus(value) {
+    setText("[data-download-source-status]", value);
+  }
+
+  function syncSourceControls() {
+    document.querySelectorAll("[data-download-source]").forEach((select) => {
+      select.value = selectedSourceId;
+    });
+  }
+
+  function isGithubUrl(value) {
+    try {
+      const url = new URL(value, document.baseURI);
+      return url.protocol === "https:" && url.hostname === "github.com";
+    } catch {
+      return false;
+    }
+  }
+
+  function buildSourceUrl(sourceId, directUrl) {
+    const source = hasSource(sourceId) ? SOURCES[sourceId] : SOURCES.github;
+    return source.prefix && isGithubUrl(directUrl) ? source.prefix + directUrl : directUrl;
+  }
+
+  function applyDownloadSource(sourceId) {
+    activeSourceId = hasSource(sourceId) && sourceId !== "auto" ? sourceId : "github";
+    document.querySelectorAll("[data-asset], [data-download-primary]").forEach((link) => {
+      const directUrl = link.dataset.directUrl;
+      if (!directUrl) return;
+      link.href = buildSourceUrl(activeSourceId, directUrl);
+      link.dataset.downloadSource = activeSourceId;
+    });
+  }
+
+  function readSourcePreference() {
+    try {
+      const value = localStorage.getItem(SOURCE_PREFERENCE_KEY);
+      return hasSource(value) ? value : "auto";
+    } catch {
+      return "auto";
+    }
+  }
+
+  function saveSourcePreference(value) {
+    try {
+      localStorage.setItem(SOURCE_PREFERENCE_KEY, value);
+    } catch {
+      // 无法持久化时只在当前页面生效。
+    }
+  }
+
+  function readGeoCache() {
+    const cached = readStorage(sessionStorage, GEO_CACHE_KEY);
+    return cached && Date.now() - cached.time < GEO_CACHE_MS ? cached : null;
+  }
+
+  async function fetchJsonWithTimeout(url, timeoutMs) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, {
+        headers: { Accept: "application/json" },
+        mode: "cors",
+        credentials: "omit",
+        cache: "no-store",
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error("Geo-IP " + response.status);
+      return await response.json();
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  async function detectCountry() {
+    const cached = readGeoCache();
+    if (cached) return cached;
+    // 依次尝试，避免一次打开页面同时把访客 IP 发给多个服务。
+    const endpoints = [
+      { url: "https://ipwho.is/", getCode: (data) => data && data.success !== false && data.country_code },
+      { url: "https://ipinfo.io/json", getCode: (data) => data && data.country },
+    ];
+    for (const endpoint of endpoints) {
+      try {
+        const data = await fetchJsonWithTimeout(endpoint.url, GEO_TIMEOUT_MS);
+        const countryCode = String(endpoint.getCode(data) || "").trim().toUpperCase();
+        if (!countryCode) continue;
+        const result = { time: Date.now(), countryCode, isChina: countryCode === "CN" };
+        writeStorage(sessionStorage, GEO_CACHE_KEY, result);
+        return result;
+      } catch {
+        // 当前服务不可用时再试备用服务；全部失败由调用方回退 GitHub 原版。
+      }
+    }
+    return null;
+  }
+
+  async function probeSource(sourceId) {
+    const source = SOURCES[sourceId];
+    const started = typeof performance !== "undefined" && performance.now ? performance.now() : Date.now();
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), PROXY_TIMEOUT_MS);
+    try {
+      // 使用仓库内的小型纯文本文件，并要求 CORS 与内容标记，避免把打不开或被劫持的线路判为可用。
+      const response = await fetch(source.prefix + PROBE_TARGET, {
+        mode: "cors",
+        credentials: "omit",
+        cache: "no-store",
+        redirect: "follow",
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error("Proxy " + response.status);
+      const body = await response.text();
+      if (!body.trimStart().startsWith(PROBE_MARKER)) throw new Error("Proxy probe content mismatch");
+      const ended = typeof performance !== "undefined" && performance.now ? performance.now() : Date.now();
+      return { id: sourceId, latency: Math.max(1, Math.round(ended - started)) };
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  async function chooseChinaSource() {
+    const cached = readStorage(sessionStorage, SOURCE_CACHE_KEY);
+    if (cached && Date.now() - cached.time < SOURCE_CACHE_MS && hasSource(cached.sourceId) && cached.sourceId !== "auto" && cached.sourceId !== "github") {
+      return cached;
+    }
+    const results = await Promise.allSettled(PROXY_SOURCE_IDS.map((id) => probeSource(id)));
+    const valid = results
+      .filter((result) => result.status === "fulfilled")
+      .map((result) => result.value)
+      .sort((a, b) => a.latency - b.latency);
+    if (!valid.length) return null;
+    const chosen = { time: Date.now(), sourceId: valid[0].id, latency: valid[0].latency };
+    writeStorage(sessionStorage, SOURCE_CACHE_KEY, chosen);
+    return chosen;
+  }
+
+  async function resolveAutoSource(token) {
+    setSourceStatus(text.sourceStatus.initial);
+    const geo = await detectCountry();
+    if (token !== sourceDecision || selectedSourceId !== "auto") return;
+    if (!geo) {
+      applyDownloadSource("github");
+      setSourceStatus(text.sourceStatus.unknown);
+      return;
+    }
+    if (!geo.isChina) {
+      applyDownloadSource("github");
+      setSourceStatus(text.sourceStatus.outside);
+      return;
+    }
+    const chosen = await chooseChinaSource();
+    if (token !== sourceDecision || selectedSourceId !== "auto") return;
+    if (!chosen) {
+      applyDownloadSource("github");
+      setSourceStatus(text.sourceStatus.fallback);
+      return;
+    }
+    applyDownloadSource(chosen.sourceId);
+    setSourceStatus(text.sourceStatus.china(sourceName(chosen.sourceId), chosen.latency));
+  }
+
+  function startSourceSelection() {
+    selectedSourceId = readSourcePreference();
+    syncSourceControls();
+    document.querySelectorAll("[data-download-source]").forEach((select) => {
+      select.addEventListener("change", () => {
+        const next = hasSource(select.value) ? select.value : "auto";
+        selectedSourceId = next;
+        saveSourcePreference(next);
+        syncSourceControls();
+        sourceDecision += 1;
+        if (next === "auto") {
+          applyDownloadSource("github");
+          void resolveAutoSource(sourceDecision);
+        } else {
+          applyDownloadSource(next);
+          setSourceStatus(text.sourceStatus.manual(sourceName(next)));
+        }
+      });
+    });
+    if (selectedSourceId === "auto") {
+      applyDownloadSource("github");
+      sourceDecision += 1;
+      void resolveAutoSource(sourceDecision);
+    } else {
+      applyDownloadSource(selectedSourceId);
+      setSourceStatus(text.sourceStatus.manual(sourceName(selectedSourceId)));
+    }
+  }
+
   // 把页面上所有 data-asset 按钮指向最新版本的实际文件，并显示文件大小与文件名
   function fillAssets(release) {
     document.querySelectorAll("[data-asset]").forEach((link) => {
       const asset = findAsset(release, link.dataset.asset);
       if (!asset) return;
-      link.href = asset.url;
+      link.dataset.directUrl = asset.url;
+      link.href = buildSourceUrl(activeSourceId, asset.url);
       link.title = asset.name;
       const size = link.querySelector("[data-size]");
       if (size) size.textContent = formatSize(asset.size);
@@ -231,7 +491,8 @@
       if (!assetId) return;
       if (label) label.textContent = text.download[system.key];
       if (asset) {
-        link.href = asset.url;
+        link.dataset.directUrl = asset.url;
+        link.href = buildSourceUrl(activeSourceId, asset.url);
         link.title = asset.name;
       }
     });
@@ -251,7 +512,8 @@
       const label = link.querySelector("[data-download-label]");
       if (label) label.textContent = text.download[system.key];
       if (asset) {
-        link.href = asset.url;
+        link.dataset.directUrl = asset.url;
+        link.href = buildSourceUrl(activeSourceId, asset.url);
         link.title = asset.name;
         const size = link.querySelector("[data-size]");
         if (size) size.textContent = formatSize(asset.size);
@@ -264,6 +526,7 @@
 
   async function init() {
     if (!document.querySelector("[data-asset], [data-download-primary], [data-recommended]")) return;
+    startSourceSelection();
     const systemPromise = detectSystem();
     let release = null;
     try {
@@ -273,6 +536,8 @@
       setText("[data-release-version]", text.releaseFallback);
     }
     showSystem(await systemPromise, release);
+    // showSystem 可能刚为首页主按钮补上实际文件地址，再应用一次当前线路。
+    applyDownloadSource(activeSourceId);
   }
 
   void init();

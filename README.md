@@ -31,13 +31,13 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 
 ## 页面与交互
 
-- 隐私政策页（`privacy/`、`en/privacy/`）由主项目的 `doc/PRIVACY.md`、`doc/PRIVACY.en.md` 生成：隐私说明改动后运行 `python3 scripts/privacy_pages.py ../wrong-notebook/doc` 并提交生成的页面。应用内与商店填写的隐私政策地址均指向此页。
+- 隐私政策页（`privacy/`、`en/privacy/`）由主项目的 `doc/PRIVACY.md`、`doc/PRIVACY.en.md` 生成：隐私说明改动后运行 `python3 scripts/privacy_pages.py ../wrong-notebook/doc` 并提交生成的页面；官网下载线路的 Geo-IP 与代理说明是本仓库补充的官网特有内容，重新生成后需保留。应用内与商店填写的隐私政策地址均指向此页。
 - 中英文首页与下载页提供 Code signing policy 和隐私政策链接；Windows 安装包在启用 SignPath 生产证书签名前如实显示未签名状态。
 - 首页主视觉、四步学习流程、功能卡片、六组真实界面预览。
 - 截图标签支持方向键、Home / End，图片可点击放大，Esc 关闭。
 - 在线演示站入口与演示账号说明。
 - Docker / 安装包（Windows、macOS、Linux、飞牛OS）/ npm / 本地源码四种部署方式切换，命令复制与受限环境下的手动复制回退。
-- 下载：首页主按钮与下载页自动识别访客的系统与架构（Windows、macOS Apple 芯片 / Intel、Linux x86_64 / arm64、安卓手机 / 平板、iPhone / iPad），通过 GitHub API 读取最新正式版并直接链接到对应安装包、显示文件大小；下载页完整列出全部系统与架构的安装包。识别优先使用浏览器的 UA Client Hints，Safari / Firefox 上的 Mac 依据 WebGL 显卡名称区分芯片，无法确定时按 Apple 芯片处理并提示。脚本未运行或 GitHub 接口不可用时，按钮回退到 Releases 页面。
+- 下载：首页主按钮与下载页自动识别访客的系统与架构（Windows、macOS Apple 芯片 / Intel、Linux x86_64 / arm64、安卓手机 / 平板、iPhone / iPad），通过 GitHub API 读取最新正式版并直接链接到对应安装包、显示文件大小；下载页完整列出全部系统与架构的安装包。识别优先使用浏览器的 UA Client Hints，Safari / Firefox 上的 Mac 依据 WebGL 显卡名称区分芯片，无法确定时按 Apple 芯片处理并提示。下载线路默认调用 Geo-IP 服务识别国家/地区；中国大陆会并行测速 ghfast.top、gh-proxy.net、gs.llkk.cc，并选取通过 CORS 与内容校验且延迟最低的线路，全部不可用时回退 GitHub 原版。页面也提供 GitHub 原版和每条第三方线路的手动选择，选择保存在当前浏览器。脚本未运行或 GitHub 接口不可用时，按钮回退到 Releases 页面。
 - 常见问题折叠面板、手机导航、当前章节高亮。
 - 深色模式：页头的主题按钮在「自动（跟随系统）→ 浅色 → 深色」之间切换，默认自动，选择只保存在本浏览器（localStorage）。首屏由 `<head>` 中的内联脚本设置主题，避免闪烁。深色样式由 `python3 scripts/dark_css.py` 根据 `styles.css` 自动换算生成，修改 `styles.css` 后需重新运行；换算不理想的地方写在脚本的 `MANUAL` 中。
 - 手机、平板与桌面布局，减少动态效果偏好、语义化标签与键盘操作。

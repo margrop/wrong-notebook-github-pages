@@ -79,6 +79,17 @@
             <p class="detected-system" data-detected-system>正在识别你的系统与架构…</p>
             <a class="button button-primary download-cta" data-recommended href="https://github.com/margrop/wrong-notebook/releases/latest" hidden><svg class="icon"><use href="#i-download"/></svg><span data-download-label>下载安装包</span><span class="dl-size" data-size></span></a>
             <p class="detected-note" data-detected-note hidden></p>
+            <div class="download-source-picker" data-download-source-picker>
+              <label for="download-source">下载线路</label>
+              <select id="download-source" data-download-source aria-describedby="download-source-status">
+                <option value="auto">自动选择（中国大陆自动测速）</option>
+                <option value="github">GitHub 原版</option>
+                <option value="ghfast">ghfast.top</option>
+                <option value="ghproxy">gh-proxy.net</option>
+                <option value="llkk">gs.llkk.cc</option>
+              </select>
+              <p class="download-source-status" id="download-source-status" data-download-source-status aria-live="polite">正在识别地区并测速下载线路…</p>
+            </div>
             <p class="release-meta"><span data-release-version>最新正式版</span> · <a data-release-link href="https://github.com/margrop/wrong-notebook/releases/latest" target="_blank" rel="noopener noreferrer">更新说明</a> · <a data-asset="checksums" href="https://github.com/margrop/wrong-notebook/releases/latest" target="_blank" rel="noopener noreferrer">SHA256 校验值</a></p>
           </div>
         </div>

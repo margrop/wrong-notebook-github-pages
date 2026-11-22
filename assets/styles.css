@@ -638,6 +638,12 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 .download-hero h1 { white-space: normal; font-size: clamp(32px, 4vw, 52px); margin-top: 12px; }
 .download-lead { margin-top: 18px; font-size: 15px; line-height: 1.9; color: var(--muted); max-width: 760px; }
 .download-detect { margin-top: 30px; padding: 24px 26px; border: 1px solid #e2daf7; border-radius: 16px; background: #fffdfa; max-width: 760px; display: grid; gap: 14px; justify-items: start; }
+.download-source-picker { margin-top: 2px; display: grid; grid-template-columns: auto minmax(180px, 280px); align-items: center; gap: 7px 10px; max-width: 100%; color: var(--muted); font-size: 12px; }
+.download-source-picker label { color: var(--ink); font-weight: 650; }
+.download-source-picker select { width: 100%; min-height: 34px; padding: 6px 30px 6px 10px; border: 1px solid #dcd6e7; border-radius: 8px; background: var(--bg); color: var(--ink); font: inherit; }
+.download-source-picker select:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+.download-source-status { grid-column: 1 / -1; margin: 0; line-height: 1.6; color: var(--muted); }
+.hero-copy .download-source-picker { max-width: 480px; }
 .detected-system { font-size: 15px; font-weight: 650; }
 .detected-note { font-size: 12px; color: var(--muted); }
 .download-cta { gap: 12px; font-size: 15px; }
@@ -685,6 +691,10 @@ code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
   .download-lead { font-size: 13px; }
   .download-detect { padding: 18px; justify-items: stretch; }
   .download-cta { white-space: normal; text-align: center; }
+  .download-source-picker { grid-template-columns: 1fr; gap: 6px; }
+  .download-source-picker select { max-width: none; }
+  .download-source-status { grid-column: auto; }
+  .hero-copy .download-source-picker { max-width: none; text-align: left; }
   .download-card { padding: 18px; }
   .dl-list { grid-template-columns: minmax(0, 1fr); }
 }

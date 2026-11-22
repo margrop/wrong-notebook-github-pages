@@ -38,7 +38,7 @@ jobs:
       - name: 检查资源与站内链接
         run: python3 scripts/check_site.py dist
       - name: 检查脚本语法
-        run: node --check assets/site.js && node --check assets/theme.js
+        run: node --check assets/site.js && node --check assets/theme.js && node --check assets/download.js
       - name: 检查深色样式与 styles.css 同步
         run: python3 scripts/dark_css.py --check
       - name: 上传 Pages 文件

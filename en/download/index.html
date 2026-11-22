@@ -79,6 +79,17 @@
             <p class="detected-system" data-detected-system>Detecting your system and architecture…</p>
             <a class="button button-primary download-cta" data-recommended href="https://github.com/margrop/wrong-notebook/releases/latest" hidden><svg class="icon"><use href="#i-download"/></svg><span data-download-label>Download</span><span class="dl-size" data-size></span></a>
             <p class="detected-note" data-detected-note hidden></p>
+            <div class="download-source-picker" data-download-source-picker>
+              <label for="download-source">Download route</label>
+              <select id="download-source" data-download-source aria-describedby="download-source-status">
+                <option value="auto">Auto (China: test accelerators)</option>
+                <option value="github">GitHub direct</option>
+                <option value="ghfast">ghfast.top</option>
+                <option value="ghproxy">gh-proxy.net</option>
+                <option value="llkk">gs.llkk.cc</option>
+              </select>
+              <p class="download-source-status" id="download-source-status" data-download-source-status aria-live="polite">Detecting your region and testing download routes…</p>
+            </div>
             <p class="release-meta"><span data-release-version>Latest release</span> · <a data-release-link href="https://github.com/margrop/wrong-notebook/releases/latest" target="_blank" rel="noopener noreferrer">Release notes</a> · <a data-asset="checksums" href="https://github.com/margrop/wrong-notebook/releases/latest" target="_blank" rel="noopener noreferrer">SHA256 checksums</a></p>
           </div>
         </div>

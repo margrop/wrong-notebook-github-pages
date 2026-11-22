@@ -93,6 +93,17 @@
             <h1 id="hero-title">Turn every mistake <br>into a <span class="highlight">step forward<svg viewBox="0 0 420 20" aria-hidden="true"><path d="M4 12C92 1 281 1 415 9M29 17C174 8 288 8 386 13"/></svg></span>.</h1>
             <p class="hero-description">Saving a mistake is only the first step.<br class="desktop-break"> AI helps you see why it went wrong and practice more like it,<br class="desktop-break"> so "I've done this" becomes "I've got this".</p>
             <div class="hero-actions"><a class="button button-primary" data-download-primary href="./download/"><svg class="icon"><use href="#i-download"/></svg> <span data-download-label>Download</span></a><a class="button button-outline" href="https://wrong-notebook-demo.margrop.net" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-play"/></svg> Try the demo</a></div>
+            <div class="download-source-picker" data-download-source-picker>
+              <label for="download-source">Download route</label>
+              <select id="download-source" data-download-source aria-describedby="download-source-status">
+                <option value="auto">Auto (China: test accelerators)</option>
+                <option value="github">GitHub direct</option>
+                <option value="ghfast">ghfast.top</option>
+                <option value="ghproxy">gh-proxy.net</option>
+                <option value="llkk">gs.llkk.cc</option>
+              </select>
+              <p class="download-source-status" id="download-source-status" data-download-source-status aria-live="polite">Detecting your region and testing download routes…</p>
+            </div>
             <p class="hero-download-meta"><span data-release-version>Windows · macOS · Linux · Android · fnOS · Synology · QNAP</span> · <a href="./download/">All platforms</a> · <a href="#deploy">Self-hosting</a></p>
             <p class="hero-demo">Demo account <code>demo@localhost</code> / <code>demo123456</code> · Shared data, please don't enter personal information</p>
             <div class="hero-notes"><span><svg class="icon small"><use href="#i-check"/></svg>Open source</span><span><svg class="icon small"><use href="#i-check"/></svg>Installers for every platform</span><span><svg class="icon small"><use href="#i-check"/></svg>Phone and computer</span></div>

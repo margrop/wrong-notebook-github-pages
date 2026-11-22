@@ -93,6 +93,17 @@
             <h1 id="hero-title">让每一道错题，<br>成为<span class="highlight">进步的起点<svg viewBox="0 0 420 20" aria-hidden="true"><path d="M4 12C92 1 281 1 415 9M29 17C174 8 288 8 386 13"/></svg></span>。</h1>
             <p class="hero-description">收录，只是第一步。<br>用 AI 帮你理解错因、举一反三，<br class="desktop-break">让「做过了」真正变成「学会了」。</p>
             <div class="hero-actions"><a class="button button-primary" data-download-primary href="./download/"><svg class="icon"><use href="#i-download"/></svg> <span data-download-label>下载安装包</span></a><a class="button button-outline" href="https://wrong-notebook-demo.margrop.net" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-play"/></svg> 在线体验</a></div>
+            <div class="download-source-picker" data-download-source-picker>
+              <label for="download-source">下载线路</label>
+              <select id="download-source" data-download-source aria-describedby="download-source-status">
+                <option value="auto">自动选择（中国大陆自动测速）</option>
+                <option value="github">GitHub 原版</option>
+                <option value="ghfast">ghfast.top</option>
+                <option value="ghproxy">gh-proxy.net</option>
+                <option value="llkk">gs.llkk.cc</option>
+              </select>
+              <p class="download-source-status" id="download-source-status" data-download-source-status aria-live="polite">正在识别地区并测速下载线路…</p>
+            </div>
             <p class="hero-download-meta"><span data-release-version>Windows · macOS · Linux · 安卓 · 飞牛OS · 群晖 · 威联通</span> · <a href="./download/">全部系统与架构</a> · <a href="#deploy">自托管部署</a></p>
             <p class="hero-demo">演示账号 <code>demo@localhost</code> / <code>demo123456</code> · 共享数据，请勿录入个人信息</p>
             <div class="hero-notes"><span><svg class="icon small"><use href="#i-check"/></svg>源码开放</span><span><svg class="icon small"><use href="#i-check"/></svg>全平台安装包</span><span><svg class="icon small"><use href="#i-check"/></svg>手机电脑都能用</span></div>
